@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAR - Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #d1d5db;
+        }
+        .text-neon-lime {
+            color: #ccff00;
+        }
+        .bg-neon-lime {
+            background-color: #ccff00;
+        }
+        .bg-gray-850 {
+            background-color: #171717;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .modal-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #171717;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+        .tech-tag {
+            background-color: #262626;
+            color: #ccff00;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+        <a href="index.html" class="text-neon-lime font-bold text-lg">UMAR</a>
+        <nav class="hidden md:flex space-x-8">
+            <a href="index.html#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="#" class="text-neon-lime transition-colors border-b-2 border-neon-lime">WORK</a>
+            <a href="index.html#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-neon-lime focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="index.html#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="#" class="text-neon-lime transition-colors border-b-2 border-neon-lime">WORK</a>
+            <a href="index.html#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
+        </nav>
+    </div>
+
+    <main class="flex-grow">
+        <!-- All Projects Section -->
+        <section id="projects" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <h1 class="text-4xl md:text-5xl font-bold mb-12 text-center">All Projects</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="1">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Portfolio" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Portfolio</h3>
+                        <p class="text-sm text-gray-400">
+                            PERSONAL PORTFOLIO WEBSITE.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="2">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=ANEMIA+DETECTION" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">ANEMIA DETECTION</h3>
+                        <p class="text-sm text-gray-400">
+                            RESEARCH FOR DETECTION ON ANEMIA.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+               <!--<div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="3">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Credit+Clone" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Credit Clone</h3>
+                        <p class="text-sm text-gray-400">
+                            Research for paving credit card bills.
+                        </p>
+                    </div>
+                </div>-->
+                <!-- Add more project cards here if you want to showcase more projects -->
+               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="4">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Dashboard" alt="Project 4" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">E-commerce Dashboard</h3>
+                        <p class="text-sm text-gray-400">
+                            A dashboard design for an online store.
+                        </p>
+                    </div>
+                </div>-->
+               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="5">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Game+UI" alt="Project 5" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Mobile Game UI</h3>
+                        <p class="text-sm text-gray-400">
+                            Designing the user interface for a mobile game.
+                        </p>
+                    </div>
+                </div>-->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Project Details -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal-button" class="close-button text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h3 id="modal-title" class="text-3xl font-bold mb-4 text-neon-lime"></h3>
+            
+            <h4 class="text-xl font-semibold mb-2">Description</h4>
+            <p id="modal-description" class="text-sm mb-4"></p>
+
+            <h4 class="text-xl font-semibold mb-2">Technology Stack</h4>
+            <div id="modal-tech-stack" class="flex flex-wrap gap-2 mb-4"></div>
+
+            <a id="modal-github-link" href="#" target="_blank" class="block mt-4 text-neon-lime hover:underline">
+                View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-xs text-gray-500">
+        <div class="relative w-full overflow-hidden h-24 mt-16">
+            <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"></div>
+            <h2 class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-gray-800">
+                Designing for extraordinary people.
+            </h2>
+        </div>
+        <p class="mt-4">&copy; 2025 UMAR. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // --- Project Data ---
+            const projectsData = [
+                {
+                    id: 1,
+                    title: 'Portfolio',
+                    description: 'The Portfolio project involved a deep-dive research into creating a responsive and elegant personal website. The goal was to showcase my skills in UI/UX design and front-end development, ensuring a seamless experience across all devices. This project utilized HTML, Tailwind CSS, and vanilla JavaScript to achieve its clean, modern look.',
+                    techStack: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
+                    githubLink: 'https://github.com/Umariqbal777/PORTFOLIO-WEBSITE'
+                },
+                {
+                    id: 2,
+                    title: 'ANEMIA DETECTION',
+                    description: 'A machine learning-based system that predicts the likelihood of anemia based on patient health parameters. The project compares multiple models — Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, and Gradient Boosting — and deploys the best-performing model (Gradient Boosting Classifier) for accurate predictions.   ',
+                    techStack: ['HTML', 'PYTHON', 'FLASK', 'PANDAS', 'SCIKIT-LEARN', 'MATPLOTLIB', 'SEABORN', 'JUPYTER NOTEBOOK'],
+                    githubLink: 'https://github.com/Umariqbal777/ANEMIA-DETECTION'
+                },
+                {
+                    id: 3,
+                    title: 'Credit Clone',
+                    description: 'This project was a UI/UX case study to replicate a popular credit card company\'s website. The focus was on analyzing user flow, information hierarchy, and visual design to create a pixel-perfect, interactive clone. This project helped refine my skills in attention to detail and a commitment to high-fidelity design.',
+                    techStack: ['HTML', 'CSS', 'JavaScript'],
+                    githubLink: 'https://github.com/UMAR/credit-clone'
+                },
+                {
+                    id: 4,
+                    title: 'E-commerce Dashboard',
+                    description: 'A responsive e-commerce dashboard prototype designed with a focus on data visualization and user-friendly management tools. The design includes charts for sales trends, order tracking, and inventory management, all built with a clean, minimalist aesthetic.',
+                    techStack: ['HTML', 'CSS', 'JavaScript', 'D3.js'],
+                    githubLink: 'https://github.com/UMAR/e-commerce-dashboard'
+                },
+                {
+                    id: 5,
+                    title: 'Mobile Game UI',
+                    description: 'This project was a deep dive into mobile UI design, creating an interface for a fictional mobile game. The UI includes a home screen, in-game overlay, and settings menu, all designed to be intuitive and visually engaging for a mobile-first audience.',
+                    techStack: ['HTML', 'CSS', 'JavaScript', 'Photoshop'],
+                    githubLink: 'https://github.com/UMAR/mobile-game-ui'
+                }
+            ];
+
+            // --- Modal Logic ---
+            const projectCards = document.querySelectorAll('.project-card');
+            const projectModal = document.getElementById('project-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalTechStack = document.getElementById('modal-tech-stack');
+            const modalGithubLink = document.getElementById('modal-github-link');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            function openModal(title, description, techStack, githubLink) {
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+
+                // Clear previous tech stack
+                modalTechStack.innerHTML = '';
+                // Populate new tech stack
+                techStack.forEach(tech => {
+                    const techSpan = document.createElement('span');
+                    techSpan.textContent = tech;
+                    techSpan.classList.add('tech-tag');
+                    modalTechStack.appendChild(techSpan);
+                });
+
+                if (githubLink) {
+                    modalGithubLink.href = githubLink;
+                    modalGithubLink.style.display = 'block';
+                } else {
+                    modalGithubLink.style.display = 'none';
+                }
+
+                projectModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                projectModal.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const projectId = parseInt(card.dataset.id);
+                    const project = projectsData.find(p => p.id === projectId);
+                    if (project) {
+                        openModal(project.title, project.description, project.techStack, project.githubLink);
+                    }
+                });
+            });
+
+            closeModalButton.addEventListener('click', closeModal);
+            projectModal.addEventListener('click', (event) => {
+                if (event.target === projectModal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

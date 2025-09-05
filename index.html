@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAR - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #d1d5db; /* A light gray for text */
+        }
+        .text-neon-lime {
+            color: #ccff00;
+        }
+        .bg-neon-lime {
+            background-color: #ccff00;
+        }
+        .border-neon-lime {
+            border-color: #ccff00;
+        }
+        .bg-gray-850 {
+            background-color: #171717;
+        }
+        .gradient-overlay {
+            position: relative;
+        }
+        .gradient-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(13, 13, 13, 1), rgba(13, 13, 13, 0));
+        }
+        .contact-input {
+            background-color: #262626;
+            color: #d1d5db;
+        }
+        /* New styling for the background text effect */
+        .hero-with-bg-text {
+            position: relative;
+        }
+        .hero-with-bg-text::before {
+            content: 'UI DESIGNER\A&\A AI ML ENTHUSIAST';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #ccff00;
+            opacity: 0.3; /* Increased opacity for more visibility */
+            pointer-events: none;
+            white-space: pre;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .hero-with-bg-text::before {
+                font-size: 3rem;
+            }
+        }
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .modal-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #171717;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+        <a href="#hero" class="text-neon-lime font-bold text-lg">UMAR</a>
+        <nav class="hidden md:flex space-x-8">
+            <a href="#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="projects.html" class="hover:text-neon-lime transition-colors">WORK</a>
+            <a href="#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
+        </nav>
+        <div class="md:hidden">
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="text-neon-lime focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="projects.html" class="text-white hover:text-neon-lime transition-colors">WORK</a>
+            <a href="#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
+        </nav>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="hero" class="relative overflow-hidden hero-with-bg-text">
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+                <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] z-0"></div>
+            </div>
+            <div class="container mx-auto px-8 md:px-16 py-24 md:py-36 relative z-20">
+                <h1 class="text-4xl md:text-7xl font-bold leading-tight">
+                    <span class="text-white">MYSELF </span><span class="text-neon-lime">UMAR</span>
+                </h1>
+                <div class="mt-8 flex items-center space-x-4">
+                    <a href="https://www.linkedin.com/in/umariqbal131" target="_blank" class="text-white hover:text-neon-lime transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.761s.784-1.761 1.75-1.761 1.75.79 1.75 1.761-.783 1.761-1.75 1.761zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.764 7 2.359v6.876z"/></svg>
+                    </a>
+                    <a href="https://github.com/Umariqbal777" target="_blank" class="text-white hover:text-neon-lime transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.373 3.431 9.845 8.205 11.385.6.111.82-.266.82-.596 0-.295-.01-1.077-.015-2.095-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.089-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.108-.775.419-1.305.762-1.605-2.665-.3-5.465-1.334-5.465-5.931 0-1.312.469-2.383 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.004-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.298-1.23 3.298-1.23.653 1.652.242 2.873.118 3.176.77.838 1.233 1.909 1.233 3.221 0 4.59-2.805 5.624-5.474 5.923.431.372.816 1.092.816 2.203 0 1.604-.015 2.899-.015 3.299 0 .332.219.712.827.595 4.77-1.54 8.201-6.012 8.201-11.385c0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container mx-auto px-8 md:px-16 py-16 md:py-24 w="full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-gray-850 p-6 rounded-3xl">
+                    <h2 class="text-2xl font-bold text-neon-lime mb-4">About</h2>
+                    <p class="text-sm" >
+                        I’m Umar Iqbal, a B.Tech student specializing in Python, JavaScript, Machine Learning, and Data Analysis. My journey combines technical expertise with creativity in UI/UX design, enabling me to develop both intelligent and user-friendly solutions.
+                    </p>
+                    <p class="text-sm mt-4">
+                        I’ve worked on projects like Anemia Detection using Machine Learning, where I developed and deployed predictive models using algorithms such as Logistic Regression, Random Forest, and Gradient Boosting. My skills also extend to Figma-based UI/UX design, Git/GitHub version control, and core computer science fundamentals (DSA, AI, Software Engineering, OS, DBMS).
+                    </p>
+                    <p class="text-sm mt-4">Beyond academics, I’ve gained industry exposure through a Machine Learning Virtual Internship with SmartBridge & Google for Developers, a UI/UX Internship at Grootz, and certifications in Java programming and innovation challenges.
+                    <p class="text-sm mt-4">
+                    I thrive on solving challenges, learning new technologies, and building impactful solutions—whether it’s through data-driven systems, smart applications, or intuitive designs.</p>
+                </div>
+                <div class="flex flex-col items-start space-y-4">
+                    <img src="umar.png" alt="Umar" class="rounded-3xl mx-auto px-8 md:px-16 py-16 md:py-24">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-4 h-4 text-neon-lime" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 8.653l1.986.723c.314-.863 1.62-1.22 2.766-1.22 2.215 0 3.194 1.542 3.194 4.098v4.938h-3v-4.938c0-1.896-.826-2.977-2.02-2.977-1.096 0-1.977.961-1.977 2.096v5.819h-3v-8.919h2.984v1.171z"/></svg>
+                        <a href="https://www.linkedin.com/in/umariqbal131" target="_blank">Linkdln</a>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-4 h-4 text-neon-lime" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.373 3.431 9.845 8.205 11.385.6.111.82-.266.82-.596 0-.295-.01-1.077-.015-2.095-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.089-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.108-.775.419-1.305.762-1.605-2.665-.3-5.465-1.334-5.465-5.931 0-1.312.469-2.383 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.004-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.298-1.23 3.298-1.23.653 1.652.242 2.873.118 3.176.77.838 1.233 1.909 1.233 3.221 0 4.59-2.805 5.624-5.474 5.923.431.372.816 1.092.816 2.203 0 1.604-.015 2.899-.015 3.299 0 .332.219.712.827.595 4.77-1.54 8.201-6.012 8.201-11.385c0-6.627-5.373-12-12-12z"/></svg>
+                        <a href="https://github.com/Umariqbal777" target="_blank" class="text-sm">Github</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Recent Projects</h2>
+                <a href="projects.html" class="text-neon-lime flex items-center space-x-2">
+                    <span>View all</span>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12l-18 12v-24z"/></svg>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
+                     data-title="Portfolio"
+                     data-description="The Portfolio project involved a deep-dive research into creating a responsive and elegant personal website. The goal was to showcase my skills in UI/UX design and front-end development, ensuring a seamless experience across all devices. This project utilized HTML, Tailwind CSS, and vanilla JavaScript to achieve its clean, modern look.">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Portfolio" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Portfolio</h3>
+                        <p class="text-sm text-gray-400">
+                            Research for paving credit card bills.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
+                     data-title="ANEMIA DETECTION"
+                     data-description="A machine learning-based system that predicts the likelihood of anemia based on patient health parameters. The project compares multiple models — Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, and Gradient Boosting — and deploys the best-performing model (Gradient Boosting Classifier) for accurate predictions.">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=ANEMIA+DETECTION" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">ANEMIA DETECTION</h3>
+                        <p class="text-sm text-gray-400">
+                            RESEARCH FOR DETECTING ANEMIA.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
+                     data-title="Credit Clone"
+                     data-description="This project was a UI/UX case study to replicate a popular credit card company's website. The focus was on analyzing user flow, information hierarchy, and visual design to create a pixel-perfect, interactive clone. This project helped refine my skills in attention to detail and a commitment to high-fidelity design.">
+                    <img src="https://placehold.co/600x400/262626/ccff00?text=Credit+Clone" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Credit Clone</h3>
+                        <p class="text-sm text-gray-400">
+                            Research for paving credit card bills.
+                        </p>
+                    </div>
+                </div>-->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <div class="bg-neon-lime text-black rounded-3xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h2 class="text-3xl font-bold">Get In Touch</h2>
+                        <p class="mt-4 text-sm">
+                            Got a project or an idea? Let's connect and build something awesome. I'm always open to new opportunities and collaborations.
+                        </p>
+                        <div class="mt-6 space-y-4">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12.713l-11.275-8.665c-.443-.339-.725-.873-.725-1.472 0-1.104.896-2 2-2h20c1.104 0 2 .896 2 2 0 .599-.282 1.133-.725 1.472l-11.275 8.665zm-11.275 1.287l11.275 8.665 11.275-8.665c.443-.339.725-.873.725-1.472 0-1.104-.896-2-2-2h-20c-1.104 0-2 .896-2 2 0 .599.282 1.133.725 1.472z"/></svg>
+                                <span>iqbalumar131@gmail.com</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.427 6.027l2.848-1.139c-1.29-1.258-2.825-2.071-4.484-2.488-.517-.133-1.076-.2-1.666-.2-2.525 0-4.821 1.271-6.191 3.232-2.427-1.192-5.462-.489-7.561 1.611-1.636 1.636-2.227 3.968-1.575 6.273 1.884 1.341 4.547 1.277 6.037.172.935 1.144 2.146 1.954 3.511 2.378 1.446.435 3.012.396 4.417.06 1.761 1.932 4.191 2.871 6.83 2.518-.009.689-.25 1.353-.699 1.958-1.401 1.83-4.047 2.227-6.027 1.146-2.887 1.455-6.666 1.455-9.289-1.159.208-.431 1.79-1.391 3.582-1.391s2.899.96 3.097 2.062c.198 1.102-.321 2.213-1.166 2.949-.554.48-1.256.848-1.996 1.054-2.261 1.493-5.32 1.235-7.531-.475-1.859-1.411-2.924-3.557-3.085-5.918-.179-.582-.284-1.189-.284-1.815 0-2.316.92-4.444 2.417-6.096 2.81-2.81 7.159-4.04 11.196-2.411 2.383 1.096 4.341 3.193 5.378 5.758 1.442.27 2.847.468 4.097.647z"/></svg>
+                                <span>@umar_iqbal__</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="w-full space-y-4">
+                        <input type="text" placeholder="Your Name" class="contact-input p-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-black">
+                        <input type="email" placeholder="Your Email" class="contact-input p-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-black">
+                        <textarea placeholder="Your Message" rows="4" class="contact-input p-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                        <button type="submit" class="bg-black text-neon-lime py-3 px-6 rounded-xl w-full font-bold hover:bg-gray-900 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Project Details -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal-button" class="close-button text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h3 id="modal-title" class="text-3xl font-bold mb-4 text-neon-lime"></h3>
+            <p id="modal-description" class="text-sm"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-xs text-gray-500">
+        <div class="relative w-full overflow-hidden h-24 mt-16">
+            <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"></div>
+            <h2 class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-gray-800">
+                Designing for extraordinary people.
+            </h2>
+        </div>
+        <p class="mt-4">&copy; 2025 UMAR. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // --- Project Modal Logic ---
+            const projectCards = document.querySelectorAll('.project-card');
+            const projectModal = document.getElementById('project-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            // Function to show the modal
+            function openModal(title, description) {
+                modalTitle.textContent = title;
+                // Append the new phrase to the existing description
+                modalDescription.textContent = `${description}\n\nFor more, you can go to the 'View all' section to read the full description.`;
+                projectModal.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
+            }
+
+            // Function to hide the modal
+            function closeModal() {
+                projectModal.classList.remove('open');
+                document.body.style.overflow = 'auto'; // Re-enables scrolling
+            }
+
+            // Add click listeners to each project card
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const title = card.dataset.title;
+                    const description = card.dataset.description;
+                    openModal(title, description);
+                });
+            });
+
+            // Add click listener to the close button
+            closeModalButton.addEventListener('click', closeModal);
+
+            // Close the modal if the user clicks the overlay (outside the content box)
+            projectModal.addEventListener('click', (event) => {
+                if (event.target === projectModal) {
+                    closeModal();
+                }
+            });
+
+            // --- Contact Form Logic ---
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevents the form from submitting
+                const emailAddress = "yourname@gmail.com";
+                openModal('Just a Quick Heads-Up!', `Pardon the dust, my backend is still under construction. For now, you can reach out directly via email to ${emailAddress}. Looking forward to hearing from you!`);
+            });
+        });
+    </script>
+</body>
+</html>

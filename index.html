@@ -332,7 +332,7 @@
             function openModal(title, description) {
                 modalTitle.textContent = title;
                 // Append the new phrase to the existing description
-                modalDescription.textContent = `${description}\n\nFor more, you can go to the 'View all' section to read the full description.`;
+                modalDescription.textContent = description;
                 projectModal.classList.add('open');
                 document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
             }

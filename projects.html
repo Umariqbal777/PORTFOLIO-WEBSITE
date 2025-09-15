@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +11,32 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+        }
+        [data-theme="dark"] body {
             background-color: #0d0d0d;
             color: #d1d5db;
         }
-        .text-neon-lime {
+        [data-theme="light"] body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        [data-theme="dark"] .text-neon-lime {
             color: #ccff00;
         }
-        .bg-neon-lime {
+        [data-theme="light"] .text-neon-lime {
+            color: #3b82f6;
+        }
+        [data-theme="dark"] .bg-neon-lime {
             background-color: #ccff00;
         }
-        .bg-gray-850 {
+        [data-theme="light"] .bg-neon-lime {
+            background-color: #3b82f6;
+        }
+        [data-theme="dark"] .bg-gray-850 {
             background-color: #171717;
+        }
+        [data-theme="light"] .bg-gray-850 {
+            background-color: #e5e7eb;
         }
         .modal-overlay {
             position: fixed;
@@ -55,6 +70,9 @@
         .modal-overlay.open .modal-content {
             transform: scale(1);
         }
+        [data-theme="light"] .modal-content {
+            background-color: #f9fafb;
+        }
         .close-button {
             position: absolute;
             top: 1rem;
@@ -69,18 +87,37 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
+        [data-theme="light"] .tech-tag {
+            background-color: #d1d5db;
+            color: #1f2937;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 bg-gray-100 bg-opacity-80 backdrop-blur-sm dark:bg-gray-950 dark:bg-opacity-80">
         <a href="index.html" class="text-neon-lime font-bold text-lg">UMAR</a>
-        <nav class="hidden md:flex space-x-8">
-            <a href="index.html#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="index.html#about" class="text-gray-900 dark:text-gray-400 hover:text-neon-lime transition-colors">ABOUT</a>
             <a href="#" class="text-neon-lime transition-colors border-b-2 border-neon-lime">WORK</a>
-            <a href="index.html#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
+            <a href="index.html#contact" class="text-gray-900 dark:text-gray-400 hover:text-neon-lime transition-colors">CONTACT</a>
+            <button id="theme-toggle-desktop" class="text-gray-900 dark:text-neon-lime focus:outline-none ml-4">
+                <svg id="moon-icon-desktop" class="w-6 h-6 dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                <svg id="sun-icon-desktop" class="w-6 h-6 dark:hidden block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </button>
         </nav>
-        <div class="md:hidden">
+        <div class="flex items-center space-x-4 md:hidden">
+            <button id="theme-toggle-mobile" class="text-gray-900 dark:text-neon-lime focus:outline-none">
+                <svg id="moon-icon-mobile" class="w-6 h-6 dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                <svg id="sun-icon-mobile" class="w-6 h-6 dark:hidden block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </button>
             <button id="mobile-menu-button" class="text-neon-lime focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -89,92 +126,58 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
-        <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-100 dark:bg-gray-950 z-40 p-8">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-900 dark:text-neon-lime focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         <nav class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
-            <a href="index.html#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="index.html#about" class="text-gray-900 dark:text-white hover:text-neon-lime transition-colors">ABOUT</a>
             <a href="#" class="text-neon-lime transition-colors border-b-2 border-neon-lime">WORK</a>
-            <a href="index.html#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
+            <a href="index.html#contact" class="text-gray-900 dark:text-white hover:text-neon-lime transition-colors">CONTACT</a>
         </nav>
     </div>
 
     <main class="flex-grow">
-        <!-- All Projects Section -->
         <section id="projects" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
-            <h1 class="text-4xl md:text-5xl font-bold mb-12 text-center">All Projects</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-900 dark:text-yellow-400">All Projects</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
                 <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="1">
                     <img src="https://placehold.co/600x400/262626/ccff00?text=Portfolio" alt="Project 1" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Portfolio</h3>
-                        <p class="text-sm text-gray-400">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-yellow-400">Portfolio</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             PERSONAL PORTFOLIO WEBSITE.
                         </p>
                     </div>
                 </div>
-                <!-- Project Card 2 -->
                 <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="2">
                     <img src="https://placehold.co/600x400/262626/ccff00?text=ANEMIA+DETECTION" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">ANEMIA DETECTION</h3>
-                        <p class="text-sm text-gray-400">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-yellow-400">ANEMIA DETECTION</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             RESEARCH FOR DETECTION ON ANEMIA.
                         </p>
                     </div>
                 </div>
-                <!-- Project Card 3 -->
-               <!--<div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="3">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Credit+Clone" alt="Project 3" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Credit Clone</h3>
-                        <p class="text-sm text-gray-400">
-                            Research for paving credit card bills.
-                        </p>
-                    </div>
-                </div>-->
-                <!-- Add more project cards here if you want to showcase more projects -->
-               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="4">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Dashboard" alt="Project 4" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">E-commerce Dashboard</h3>
-                        <p class="text-sm text-gray-400">
-                            A dashboard design for an online store.
-                        </p>
-                    </div>
-                </div>-->
-               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="5">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Game+UI" alt="Project 5" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Mobile Game UI</h3>
-                        <p class="text-sm text-gray-400">
-                            Designing the user interface for a mobile game.
-                        </p>
-                    </div>
-                </div>-->
             </div>
         </section>
     </main>
 
-    <!-- Modal for Project Details -->
     <div id="project-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-modal-button" class="close-button text-white">
+        <div class="modal-content dark:bg-gray-850">
+            <button id="close-modal-button" class="close-button text-gray-900 dark:text-yellow-400">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             <h3 id="modal-title" class="text-3xl font-bold mb-4 text-neon-lime"></h3>
             
-            <h4 class="text-xl font-semibold mb-2">Description</h4>
-            <p id="modal-description" class="text-sm mb-4"></p>
+            <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-blue-400">Description</h4>
+            <p id="modal-description" class="text-sm mb-4 text-gray-500 dark:text-gray-400"></p>
 
-            <h4 class="text-xl font-semibold mb-2">Technology Stack</h4>
+            <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-blue-400">Technology Stack</h4>
             <div id="modal-tech-stack" class="flex flex-wrap gap-2 mb-4"></div>
 
             <a id="modal-github-link" href="#" target="_blank" class="block mt-4 text-neon-lime hover:underline">
@@ -183,11 +186,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="text-center py-8 text-xs text-gray-500">
+    <footer class="text-center py-8 text-xs text-gray-500 dark:text-gray-400">
         <div class="relative w-full overflow-hidden h-24 mt-16">
             <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"></div>
-            <h2 class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-gray-800">
+            <h2 class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-gray-300 dark:text-gray-800">
                 Designing for extraordinary people.
             </h2>
         </div>
@@ -196,6 +198,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Toggle Logic ---
+            const themeToggleBtnDesktop = document.getElementById('theme-toggle-desktop');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+            const html = document.documentElement;
+
+            // Function to set the theme
+            function setTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            }
+
+            // Check for saved theme or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDark) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+
+            // Toggle theme on button click
+            if(themeToggleBtnDesktop) {
+                themeToggleBtnDesktop.addEventListener('click', () => {
+                    const currentTheme = html.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+            if(themeToggleBtnMobile) {
+                themeToggleBtnMobile.addEventListener('click', () => {
+                    const currentTheme = html.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+        
+            // --- Mobile Menu Logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
             const mobileMenu = document.getElementById('mobile-menu');

@@ -487,27 +487,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-            const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
+    if (mobileMenuButton && closeMobileMenuButton && mobileMenu) {
+        // Open menu
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // prevent background scroll
+        });
 
-            closeMobileMenuButton.addEventListener('click', () => {
+        // Close menu
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // restore scroll
+        });
+
+        // Optional: close menu by clicking outside menu content
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
                 mobileMenu.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            });
-
-            // Close menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
-            });
+            }
+        });
+    }
+});
 
             // --- Project Modal Logic ---
             const projectCards = document.querySelectorAll('.project-card');

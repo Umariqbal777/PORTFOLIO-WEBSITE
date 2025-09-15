@@ -9,23 +9,126 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Dark Theme (Default) */
+            --background-color: #0d0d0d;
+            --text-color: #d1d5db;
+            --accent-color: #ccff00;
+            --card-background-color: #171717;
+            --contact-background-color: #ccff00;
+            --contact-text-color: #0d0d0d;
+            --contact-input-bg: #262626;
+            --contact-input-color: #d1d5db;
+            --hero-bg-text-color: #ccff00;
+            --hero-bg-overlay: rgba(13, 13, 13, 0.6);
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --nav-bg: rgba(0, 0, 0, 0.6);
+            --nav-link-color: #d1d5db;
+            --nav-link-hover-color: #ccff00;
+            --nav-button-hover-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode {
+            /* Light Theme */
+            --background-color: #f3f4f6;
+            --text-color: #1f2937;
+            --accent-color: #0077b6; /* A professional blue */
+            --card-background-color: #ffffff;
+            --contact-background-color: #1f2937;
+            --contact-text-color: #ffffff;
+            --contact-input-bg: #e5e7eb;
+            --contact-input-color: #1f2937;
+            --hero-bg-text-color: #1f2937;
+            --hero-bg-overlay: rgba(243, 244, 246, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(255, 255, 255, 0.6);
+            --nav-link-color: #1f2937;
+            --nav-link-hover-color: #0077b6;
+            --nav-button-hover-bg: rgba(0, 0, 0, 0.05);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d;
-            color: #d1d5db; /* A light gray for text */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+        
+        /* General styling using variables */
         .text-neon-lime {
-            color: #ccff00;
+            color: var(--accent-color);
         }
         .bg-neon-lime {
-            background-color: #ccff00;
+            background-color: var(--accent-color);
         }
         .border-neon-lime {
-            border-color: #ccff00;
+            border-color: var(--accent-color);
         }
         .bg-gray-850 {
-            background-color: #171717;
+            background-color: var(--card-background-color);
         }
+        .contact-input {
+            background-color: var(--contact-input-bg);
+            color: var(--contact-input-color);
+        }
+        .project-card, .skill-card {
+            background-color: var(--card-background-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .project-card:hover, .skill-card:hover {
+            background-color: var(--accent-color);
+            color: var(--contact-text-color);
+        }
+
+        /* FIX: Correct filter logic for light and dark modes */
+        .project-card img, .skill-card img {
+            transition: filter 0.3s ease;
+        }
+
+        /* Dark Mode (Default) */
+        body:not(.light-mode) .project-card img, body:not(.light-mode) .skill-card img {
+            filter: grayscale(100%);
+        }
+        body:not(.light-mode) .project-card:hover img, body:not(.light-mode) .skill-card:hover img {
+            filter: none;
+        }
+
+        /* Light Mode */
+        body.light-mode .project-card img, body.light-mode .skill-card img {
+            filter: none; /* Logos are full color by default */
+        }
+        body.light-mode .project-card:hover img, body.light-mode .skill-card:hover img {
+            filter: brightness(0) invert(1); /* Invert to white on hover */
+        }
+
+
+        /* Navigation Bar Styles */
+        .header-transparent {
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(8px);
+        }
+        .header-transparent a {
+            color: var(--nav-link-color);
+            transition: color 0.3s ease;
+        }
+        .header-transparent a:hover {
+            color: var(--nav-link-hover-color);
+        }
+        .header-transparent .text-neon-lime {
+            color: var(--nav-link-hover-color);
+        }
+        .header-transparent #theme-toggle {
+            background-color: transparent;
+        }
+        .header-transparent #theme-toggle:hover {
+            background-color: var(--nav-button-hover-bg);
+        }
+
+        /* Specific light-mode overrides */
+        body.light-mode .bg-gray-850 {
+            background-color: var(--card-background-color);
+        }
+        
         .gradient-overlay {
             position: relative;
         }
@@ -38,11 +141,6 @@
             bottom: 0;
             background: linear-gradient(to right, rgba(13, 13, 13, 1), rgba(13, 13, 13, 0));
         }
-        .contact-input {
-            background-color: #262626;
-            color: #d1d5db;
-        }
-        /* New styling for the background text effect */
         .hero-with-bg-text {
             position: relative;
         }
@@ -55,25 +153,48 @@
             z-index: 1;
             font-size: 8rem;
             font-weight: 700;
-            color: #ccff00;
-            opacity: 0.3; /* Increased opacity for more visibility */
+            color: var(--hero-bg-text-color);
+            opacity: 0.2;
             pointer-events: none;
             white-space: pre;
             text-align: center;
+            transition: color 0.3s ease;
         }
+        .hero-with-bg-text .bg-black {
+            background-color: var(--hero-bg-overlay);
+            transition: background-color 0.3s ease;
+        }
+        .bg-grid-white {
+            background-image: var(--grid-color);
+        }
+        .bg-grid-white {
+            background-image: linear-gradient(0deg, var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .modal-content {
+            background-color: var(--card-background-color);
+            color: var(--text-color);
+        }
+        .modal-content .text-neon-lime {
+            color: var(--accent-color);
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
         @media (max-width: 768px) {
             .hero-with-bg-text::before {
                 font-size: 3rem;
             }
         }
-        /* Modal styles */
+        
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -87,7 +208,6 @@
             opacity: 1;
         }
         .modal-content {
-            background-color: #171717;
             padding: 2rem;
             border-radius: 1.5rem;
             width: 90%;
@@ -105,28 +225,42 @@
             right: 1rem;
             cursor: pointer;
         }
+        .skill-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .skill-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 header-transparent">
         <a href="#hero" class="text-neon-lime font-bold text-lg">UMAR</a>
-        <nav class="hidden md:flex space-x-8">
+        <nav class="hidden md:flex items-center space-x-8">
             <a href="#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
             <a href="projects.html" class="hover:text-neon-lime transition-colors">WORK</a>
             <a href="#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--nav-button-hover-bg)] transition-colors">
+                <svg id="sun-icon" class="w-6 h-6 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
         </nav>
         <div class="md:hidden">
-            <!-- Mobile menu button -->
             <button id="mobile-menu-button" class="text-neon-lime focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
         <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -141,15 +275,16 @@
     </div>
 
     <main class="flex-grow">
-        <!-- Hero Section -->
         <section id="hero" class="relative overflow-hidden hero-with-bg-text">
             <div class="absolute inset-0">
                 <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
                 <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] z-0"></div>
             </div>
             <div class="container mx-auto px-8 md:px-16 py-24 md:py-36 relative z-20">
-                <h1 class="text-4xl md:text-7xl font-bold leading-tight">
-                    <span class="text-white">MYSELF </span><span class="text-neon-lime">UMAR</span>
+                <h1 class="text-4xl md:text-7xl font-bold leading-tight flex items-center space-x-4">
+                 <span class="text-white">MYSELF</span>
+                 <span class="text-neon-lime">UMAR</span>
+                
                 </h1>
                 <div class="mt-8 flex items-center space-x-4">
                     <a href="https://www.linkedin.com/in/umariqbal131" target="_blank" class="text-white hover:text-neon-lime transition-colors">
@@ -158,17 +293,19 @@
                     <a href="https://github.com/Umariqbal777" target="_blank" class="text-white hover:text-neon-lime transition-colors">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.373 3.431 9.845 8.205 11.385.6.111.82-.266.82-.596 0-.295-.01-1.077-.015-2.095-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.089-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.108-.775.419-1.305.762-1.605-2.665-.3-5.465-1.334-5.465-5.931 0-1.312.469-2.383 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.004-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.298-1.23 3.298-1.23.653 1.652.242 2.873.118 3.176.77.838 1.233 1.909 1.233 3.221 0 4.59-2.805 5.624-5.474 5.923.431.372.816 1.092.816 2.203 0 1.604-.015 2.899-.015 3.299 0 .332.219.712.827.595 4.77-1.54 8.201-6.012 8.201-11.385c0-6.627-5.373-12-12-12z"/></svg>
                     </a>
+                    <a href="https://www.instagram.com/umar_iqbal__/" target="_blank" class="text-white hover:text-neon-lime transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.716 0 3.056.014 4.123.06c.974.043 1.55.201 2.083.409.733.284 1.238.62 1.802 1.185.565.564.901 1.07 1.185 1.802.208.533.366 1.109.409 2.083.046 1.067.06 1.403.06 4.123s-.014 3.056-.06 4.123c-.043.974-.201 1.55-.409 2.083-.284.733-.62 1.238-1.185 1.802-.564.565-1.07 0-1.802 1.185-.533.208-1.109.366-2.083.409-1.067.046-1.403.06-4.123.06s-3.056-.014-4.123-.06c-.974-.043-1.55-.201-2.083-.409-.733-.284-1.238-.62-1.802-1.185-.565-.564-.901-1.07-1.185-1.802-.208-.533-.366-1.109-.409-2.083-.046-1.067-.06-1.403-.06-4.123s.014-3.056.06-4.123c.043-.974.201-1.55.409-2.083.284-.733.62-1.238 1.185-1.802.564-.565 1.07-.901 1.802-1.185.533-.208 1.109-.366 2.083-.409 1.067-.046 1.403-.06 4.123-.06zm0-2c-2.761 0-3.177.014-4.253.062-1.026.046-1.745.226-2.502.518-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476.518 2.502.048 1.076.062 1.492.062 4.253s-.014 3.177-.062 4.253c-.046 1.026-.226 1.745-.518 2.502-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476.518 2.502.048 1.076.062 1.492.062 4.253zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 8c-1.656 0-3-1.344-3-3s1.344-3 3-3 3 1.344 3 3-1.344 3-3 3zm6.345-8.918c-.779 0-1.411-.632-1.411-1.411s.632-1.411 1.411-1.411 1.411.632 1.411 1.411-.632 1.411-1.411 1.411z"/></svg>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="container mx-auto px-8 md:px-16 py-16 md:py-24 w="full">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="bg-gray-850 p-6 rounded-3xl">
                     <h2 class="text-2xl font-bold text-neon-lime mb-4">About</h2>
                     <p class="text-sm" >
-                        I’m Umar Iqbal, a B.Tech student specializing in Python, JavaScript, Machine Learning, and Data Analysis. My journey combines technical expertise with creativity in UI/UX design, enabling me to develop both intelligent and user-friendly solutions.
+                        I’m Umar Iqbal, B.Tech student specializing in Python, JavaScript, Machine Learning, and Data Analysis. My journey combines technical expertise with creativity in UI/UX design, enabling me to develop both intelligent and user-friendly solutions.
                     </p>
                     <p class="text-sm mt-4">
                         I’ve worked on projects like Anemia Detection using Machine Learning, where I developed and deployed predictive models using algorithms such as Logistic Regression, Random Forest, and Gradient Boosting. My skills also extend to Figma-based UI/UX design, Git/GitHub version control, and core computer science fundamentals (DSA, AI, Software Engineering, OS, DBMS).
@@ -190,8 +327,73 @@
                 </div>
             </div>
         </section>
+        
+        <section id="skills" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <h2 class="text-3xl font-bold mb-8">Skills</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt="HTML" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">HTML</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt="CSS" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">CSS</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">JavaScript</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Python</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" alt="PANDAS" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Pandas</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Created_with_Matplotlib-logo.svg/1920px-Created_with_Matplotlib-logo.svg.png" alt="Matplotlib" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Matplotlib</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Scikit-learn</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/numpy/numpy-icon.svg" alt="NumPy" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">NumPy</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="TensorFlow" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">TensorFlow</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" alt="PyTorch" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">PyTorch</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="Figma" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Figma</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/canva/canva-icon.svg" alt="Canva" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Canva</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">Git</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="GitHub" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">GitHub</span>
+                </div>
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                    <span class="text-md font-semibold">C++</span>
+                </div>
+            </div>
+        </section>
 
-        <!-- Work Section -->
         <section id="work" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-bold">Recent Projects</h2>
@@ -201,7 +403,6 @@
                 </a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
                 <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
                      data-title="Portfolio"
                      data-description="The Portfolio project involved a deep-dive research into creating a responsive and elegant personal website. The goal was to showcase my skills in UI/UX design and front-end development, ensuring a seamless experience across all devices. This project utilized HTML, Tailwind CSS, and vanilla JavaScript to achieve its clean, modern look.">
@@ -213,7 +414,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- Project Card 2 -->
                 <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
                      data-title="ANEMIA DETECTION"
                      data-description="A machine learning-based system that predicts the likelihood of anemia based on patient health parameters. The project compares multiple models — Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, and Gradient Boosting — and deploys the best-performing model (Gradient Boosting Classifier) for accurate predictions.">
@@ -225,22 +425,9 @@
                         </p>
                     </div>
                 </div>
-                <!-- Project Card 3 -->
-               <!-- <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer"
-                     data-title="Credit Clone"
-                     data-description="This project was a UI/UX case study to replicate a popular credit card company's website. The focus was on analyzing user flow, information hierarchy, and visual design to create a pixel-perfect, interactive clone. This project helped refine my skills in attention to detail and a commitment to high-fidelity design.">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Credit+Clone" alt="Project 3" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Credit Clone</h3>
-                        <p class="text-sm text-gray-400">
-                            Research for paving credit card bills.
-                        </p>
-                    </div>
-                </div>-->
-            </div>
+                </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
             <div class="bg-neon-lime text-black rounded-3xl p-8 md:p-12">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -273,7 +460,6 @@
         </section>
     </main>
 
-    <!-- Modal for Project Details -->
     <div id="project-modal" class="modal-overlay">
         <div class="modal-content">
             <button id="close-modal-button" class="close-button text-white">
@@ -286,7 +472,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="text-center py-8 text-xs text-gray-500">
         <div class="relative w-full overflow-hidden h-24 mt-16">
             <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"></div>
@@ -332,7 +517,7 @@
             function openModal(title, description) {
                 modalTitle.textContent = title;
                 // Append the new phrase to the existing description
-                modalDescription.textContent = description;
+                modalDescription.textContent = `${description}\n\nFor more, you can go to the 'View all' section to read the full description.`;
                 projectModal.classList.add('open');
                 document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
             }
@@ -368,6 +553,66 @@
                 event.preventDefault(); // Prevents the form from submitting
                 const emailAddress = "iqbalumar131@gmail.com";
                 openModal('Just a Quick Heads-Up!', `Pardon the dust, my backend is still under construction. For now, you can reach out directly via email to ${emailAddress}. Looking forward to hearing from you!`);
+            });
+
+            // --- Skills Section Animation Logic (Updated) ---
+            const skillCards = document.querySelectorAll('.skill-card');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            skillCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // --- Theme Toggle Logic (Updated) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            const header = document.querySelector('header');
+
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                document.body.classList.add(currentTheme);
+                if (currentTheme === 'light-mode') {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                    header.classList.remove('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
+                    header.classList.add('header-transparent');
+                } else {
+                    header.classList.add('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
+                }
+            } else {
+                // Default to dark mode if no preference is found
+                header.classList.add('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                moonIcon.classList.toggle('hidden');
+                sunIcon.classList.toggle('hidden');
+
+                // Toggle header classes for transparent effect
+                header.classList.toggle('bg-black');
+                header.classList.toggle('bg-opacity-80');
+                header.classList.toggle('backdrop-blur-sm');
+                header.classList.toggle('header-transparent');
+
+                let theme = 'dark-mode';
+                if (document.body.classList.contains('light-mode')) {
+                    theme = 'light-mode';
+                }
+                localStorage.setItem('theme', theme);
             });
         });
     </script>

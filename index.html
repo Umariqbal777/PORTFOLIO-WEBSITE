@@ -117,10 +117,10 @@
         .header-transparent .text-neon-lime {
             color: var(--nav-link-hover-color);
         }
-        .header-transparent #theme-toggle {
+        .header-transparent .theme-toggle-btn {
             background-color: transparent;
         }
-        .header-transparent #theme-toggle:hover {
+        .header-transparent .theme-toggle-btn:hover {
             background-color: var(--nav-button-hover-bg);
         }
 
@@ -243,38 +243,51 @@
             <a href="#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
             <a href="projects.html" class="hover:text-neon-lime transition-colors">WORK</a>
             <a href="#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
-            <button id="theme-toggle-btn" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors mt-8 flex items-center justify-center">
-              <svg id="sun-icon" class="w-6 h-6 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-              </svg>
-              <svg id="moon-icon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-               </svg>
-            </button>
+           <button class="theme-toggle-btn p-2 rounded-full hover:bg-[var(--nav-button-hover-bg)] transition-colors mt-12">
+    <svg class="sun-icon w-8 h-8 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+    <svg class="moon-icon w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+         xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+</button>
 
         </nav>
-        <div class="md:hidden z-50">
-            <button id="mobile-menu-button" class="text-neon-lime focus:outline-none p-2 bg-black/70 rounded-md hover:bg-black/90">
-                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+       <div class="md:hidden z-50">
+    <button id="mobile-menu-button" class="text-neon-lime focus:outline-none p-2 bg-black/70 rounded-md hover:bg-black/90">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-               </svg>
-            </button>
-        </div>
+        </svg>
+    </button>
+</div>
+
+
     </header>
 
-    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
+    <div id="mobile-menu" class="hidden  fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
         <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
-        <nav class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
-            <a href="#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
-            <a href="projects.html" class="text-white hover:text-neon-lime transition-colors">WORK</a>
-            <a href="#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
-        </nav>
+        <div class="flex flex-col items-center justify-center h-full">
+            <nav class="flex flex-col items-center space-y-8 text-xl">
+                <a href="#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
+                <a href="projects.html" class="text-white hover:text-neon-lime transition-colors">WORK</a>
+                <a href="#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
+            </nav>
+            <button class="theme-toggle-btn p-2 rounded-full transition-colors mt-12">
+                <svg class="sun-icon w-8 h-8 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="moon-icon w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <main class="flex-grow">
@@ -499,7 +512,16 @@
             closeMobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            }); 
+            });
+
+            // Close menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
             // --- Project Modal Logic ---
             const projectCards = document.querySelectorAll('.project-card');
             const projectModal = document.getElementById('project-modal');
@@ -569,63 +591,44 @@
             });
 
             // --- Theme Toggle Logic (Updated) ---
-             const themeToggleButtons = document.querySelectorAll(".theme-toggle-btn");
+            const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+            const sunIcons = document.querySelectorAll('.sun-icon');
+            const moonIcons = document.querySelectorAll('.moon-icon');
+            const header = document.querySelector('header');
 
-    // For each toggle button, handle click
-    themeToggleButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // Toggle dark class on body
-            document.body.classList.toggle("dark");
-
-            // Update all icons across all buttons
-            themeToggleButtons.forEach((button) => {
-                const sunIcon = button.querySelector(".sun-icon");
-                const moonIcon = button.querySelector(".moon-icon");
-
-                if (document.body.classList.contains("dark")) {
-                    sunIcon.classList.remove("hidden");
-                    moonIcon.classList.add("hidden");
-                } else {
-                    sunIcon.classList.add("hidden");
-                    moonIcon.classList.remove("hidden");
-                }
-            });
-        });
-    });
-
-            // Check for saved theme preference
-            const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) {
-                document.body.classList.add(currentTheme);
-                if (currentTheme === 'light-mode') {
-                    moonIcon.classList.add('hidden');
-                    sunIcon.classList.remove('hidden');
+            function applyTheme(theme) {
+                if (theme === 'light-mode') {
+                    document.body.classList.add('light-mode');
+                    sunIcons.forEach(icon => icon.classList.remove('hidden'));
+                    moonIcons.forEach(icon => icon.classList.add('hidden'));
                     header.classList.remove('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
                     header.classList.add('header-transparent');
                 } else {
+                    document.body.classList.remove('light-mode');
+                    sunIcons.forEach(icon => icon.classList.add('hidden'));
+                    moonIcons.forEach(icon => icon.classList.remove('hidden'));
                     header.classList.add('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
+                    header.classList.remove('header-transparent');
                 }
+            }
+            
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                applyTheme(currentTheme);
             } else {
-                // Default to dark mode if no preference is found
-                header.classList.add('bg-black', 'bg-opacity-80', 'backdrop-blur-sm');
+                applyTheme('dark-mode'); // Default theme
             }
 
-            themeToggleBtn.addEventListener('click', () => {
-                document.body.classList.toggle('light-mode');
-                moonIcon.classList.toggle('hidden');
-                sunIcon.classList.toggle('hidden');
-
-                // Toggle header classes for transparent effect
-                header.classList.toggle('bg-black');
-                header.classList.toggle('bg-opacity-80');
-                header.classList.toggle('backdrop-blur-sm');
-                header.classList.toggle('header-transparent');
-
-                let theme = 'dark-mode';
-                if (document.body.classList.contains('light-mode')) {
-                    theme = 'light-mode';
-                }
-                localStorage.setItem('theme', theme);
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    let newTheme = 'dark-mode';
+                    if (!document.body.classList.contains('light-mode')) {
+                        newTheme = 'light-mode';
+                    }
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                });
             });
         });
     </script>

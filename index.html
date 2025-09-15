@@ -487,33 +487,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-    if (mobileMenuButton && closeMobileMenuButton && mobileMenu) {
-        // Open menu
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // prevent background scroll
-        });
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
 
-        // Close menu
-        closeMobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = 'auto'; // restore scroll
-        });
-
-        // Optional: close menu by clicking outside menu content
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
+            closeMobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            }
-        });
-    }
-});
-
+            }); 
             // --- Project Modal Logic ---
             const projectCards = document.querySelectorAll('.project-card');
             const projectModal = document.getElementById('project-modal');

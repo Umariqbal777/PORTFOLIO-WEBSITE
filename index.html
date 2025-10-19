@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;550;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Dark Theme (Default) */
@@ -71,36 +71,53 @@
             background-color: var(--contact-input-bg);
             color: var(--contact-input-color);
         }
-        .project-card, .skill-card {
+        
+        /* --- START: UPDATED ANIMATION --- */
+        .project-card, .skill-card, .certificate-card {
             background-color: var(--card-background-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .project-card:hover, .skill-card:hover {
-            background-color: var(--accent-color);
-            color: var(--contact-text-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* FIX: Correct filter logic for light and dark modes */
-        .project-card img, .skill-card img {
-            transition: filter 0.3s ease;
+        /* Animation for Project Cards (Simple Lift) */
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        body.light-mode .project-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
-        /* Dark Mode (Default) */
-        body:not(.light-mode) .project-card img, body:not(.light-mode) .skill-card img {
-            filter: grayscale(100%);
-        }
-        body:not(.light-mode) .project-card:hover img, body:not(.light-mode) .skill-card:hover img {
-            filter: none;
-        }
-
-        /* Light Mode */
-        body.light-mode .project-card img, body.light-mode .skill-card img {
-            filter: none; /* Logos are full color by default */
-        }
-        body.light-mode .project-card:hover img, body.light-mode .skill-card:hover img {
-            filter: brightness(0) invert(1); /* Invert to white on hover */
+        /* --- NEW: Animation for Skill Cards (Lift, Glow, & Flip) --- */
+        .skill-card:hover {
+            transform: translateY(-5px);
+            /* A subtle shadow combined with an accent-colored glow */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1), 0 0 12px -2px var(--accent-color);
         }
 
+        .skill-card img {
+            /* Add transition for the new flip animation */
+            transition: transform 0.5s ease;
+        }
+        
+        .skill-card:hover img {
+            /* Apply the 360-degree flip on hover */
+            transform: rotateY(360deg);
+        }
+        /* --- END: NEW ANIMATION --- */
+
+        /* Animation for Certificate Cards (Subtle Lift) */
+        .certificate-card:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body.light-mode .certificate-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Make sure images have no filters */
+        .project-card img {
+            filter: none !important;
+        }
 
         /* Navigation Bar Styles */
         .header-transparent {
@@ -225,14 +242,68 @@
             right: 1rem;
             cursor: pointer;
         }
+        
+        /* Scroll-in animation */
         .skill-card {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-out;
         }
         .skill-card.animate {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* --- NEW: Tab Styles --- */
+        .tab-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--card-background-color);
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            background-color: var(--card-background-color);
+        }
+        .tab-btn.active-tab {
+            background-color: var(--accent-color);
+            color: var(--contact-text-color); /* This is the color for text on accent bg */
+            border-color: var(--accent-color);
+        }
+        
+        /* Light Mode overrides for tabs */
+        body.light-mode .tab-btn.active-tab {
+            color: var(--contact-text-color); /* Should be white */
+        }
+
+        /* --- NEW: Timeline Styles --- */
+        .timeline-line {
+            background-color: var(--grid-color);
+            left: 1rem; /* Simple left offset */
+            width: 2px;
+        }
+        .timeline-item {
+            padding-left: 3.5rem; /* Space for icon and line */
+        }
+        .timeline-node-icon {
+            left: 1rem;
+            top: 0.5rem;
+            transform: translateX(-50%);
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--card-background-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--grid-color);
+        }
+        .timeline-node-icon svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--accent-color);
+        }
+        .timeline-content {
+            background-color: var(--card-background-color);
         }
     </style>
 </head>
@@ -241,6 +312,8 @@
         <a href="#hero" class="text-neon-lime font-bold text-lg">UMAR</a>
         <nav class="hidden md:flex items-center space-x-8">
             <a href="#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
+            <a href="#experience-education" class="hover:text-neon-lime transition-colors">EXPERIENCE</a>
+            <a href="#certifications" class="hover:text-neon-lime transition-colors">CERTIFICATIONS</a>
             <a href="projects.html" class="hover:text-neon-lime transition-colors">WORK</a>
             <a href="#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
            <button class="theme-toggle-btn p-2 rounded-full hover:bg-[var(--nav-button-hover-bg)] transition-colors flex items-center justify-center">
@@ -275,6 +348,8 @@
         <div class="flex flex-col items-center justify-center h-full">
             <nav class="flex flex-col items-center space-y-8 text-xl">
                 <a href="#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
+                <a href="#experience-education" class="text-white hover:text-neon-lime transition-colors">EXPERIENCE</a>
+                <a href="#certifications" class="text-white hover:text-neon-lime transition-colors">CERTIFICATIONS</a>
                 <a href="projects.html" class="text-white hover:text-neon-lime transition-colors">WORK</a>
                 <a href="#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
             </nav>
@@ -309,7 +384,7 @@
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.373 3.431 9.845 8.205 11.385.6.111.82-.266.82-.596 0-.295-.01-1.077-.015-2.095-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.089-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.108-.775.419-1.305.762-1.605-2.665-.3-5.465-1.334-5.465-5.931 0-1.312.469-2.383 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.004-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.298-1.23 3.298-1.23.653 1.652.242 2.873.118 3.176.77.838 1.233 1.909 1.233 3.221 0 4.59-2.805 5.624-5.474 5.923.431.372.816 1.092.816 2.203 0 1.604-.015 2.899-.015 3.299 0 .332.219.712.827.595 4.77-1.54 8.201-6.012 8.201-11.385c0-6.627-5.373-12-12-12z"/></svg>
                     </a>
                     <a href="https://www.instagram.com/umar_iqbal__/" target="_blank" class="text-white hover:text-neon-lime transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.716 0 3.056.014 4.123.06c.974.043 1.55.201 2.083.409.733.284 1.238.62 1.802 1.185.565.564.901 1.07 1.185 1.802.208.533.366 1.109.409 2.083.046 1.067.06 1.403.06 4.123s-.014 3.056-.06 4.123c-.043.974-.201 1.55-.409 2.083-.284.733-.62 1.238-1.185 1.802-.564.565-1.07 0-1.802 1.185-.533.208-1.109.366-2.083.409-1.067.046-1.403.06-4.123.06s-3.056-.014-4.123-.06c-.974-.043-1.55-.201-2.083-.409-.733-.284-1.238-.62-1.802-1.185-.565-.564-.901-1.07-1.185-1.802-.208-.533-.366-1.109-.409-2.083-.046-1.067-.06-1.403-.06-4.123s.014-3.056.06-4.123c.043-.974.201-1.55.409-2.083.284-.733.62-1.238 1.185-1.802.564-.565 1.07-.901 1.802-1.185.533-.208 1.109-.366 2.083-.409 1.067-.046 1.403-.06 4.123-.06zm0-2c-2.761 0-3.177.014-4.253.062-1.026.046-1.745.226-2.502.518-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476.518 2.502.048 1.076.062 1.492.062 4.253s-.014 3.177-.062 4.253c-.046 1.026-.226 1.745-.518 2.502-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476.518 2.502.048 1.076.062 1.492.062 4.253zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 8c-1.656 0-3-1.344-3-3s1.344-3 3-3 3 1.344 3 3-1.344 3-3 3zm6.345-8.918c-.779 0-1.411-.632-1.411-1.411s.632-1.411 1.411-1.411 1.411.632 1.411 1.411-.632 1.411-1.411 1.411z"/></svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.716 0 3.056.014 4.123.06c.974.043 1.55.201 2.083.409.733.284 1.238.62 1.802 1.185.565.564.901 1.07 1.185 1.802.208.533.366 1.109.409 2.083.046 1.067.06 1.403.06 4.123s-.014 3.056-.06 4.123c-.043.974-.201 1.55-.409 2.083-.284.733-.62 1.238-1.185 1.802-.564.565-1.07 0-1.802 1.185-.533.208-1.109.366-2.083.409-1.067.046-1.403.06-4.123.06s-3.056-.014-4.123-.06c-.974-.043-1.55-.201-2.083-.409-.733-.284-1.238-.62-1.802-1.185-.565-.564-.901-1.07-1.185-1.802-.208-.533-.366-1.109-.409-2.083-.046-1.067-.06-1.403-.06-4.123s.014-3.056.06-4.123c.043-.974.201-1.55.409-2.083.284-.733.62-1.238 1.185-1.802.564-.565 1.07-.901 1.802-1.185.533-.208 1.109.366 2.083.409 1.067-.046 1.403-.06 4.123-.06zm0-2c-2.761 0-3.177.014-4.253.062-1.026.046-1.745.226-2.502.518-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476-.518 2.502.048 1.076.062 1.492.062 4.253s-.014 3.177-.062 4.253c-.046 1.026-.226 1.745-.518 2.502-1.396.53-2.529 1.664-3.059 3.059-.292.757-.472 1.476-.518 2.502-.048 1.076-.062 1.492-.062 4.253s.014 3.177.062 4.253c.046 1.026.226 1.745.518 2.502 1.396.53 2.529 1.664 3.059 3.059.292.757.472 1.476.518 2.502.048 1.076.062 1.492.062 4.253zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 8c-1.656 0-3-1.344-3-3s1.344-3 3-3 3 1.344 3 3-1.344 3-3 3zm6.345-8.918c-.779 0-1.411-.632-1.411-1.411s.632-1.411 1.411-1.411 1.411.632 1.411 1.411-.632 1.411-1.411 1.411z"/></svg>
                     </a>
                 </div>
             </div>
@@ -352,68 +427,210 @@
         </section>
         
         <section id="skills" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
-            <h2 class="text-3xl font-bold mb-8">Skills</h2>
+            <h2 class="text-3xl font-bold mb-8 text-center">Skills</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt="HTML" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt="HTML" class="h-16 mb-4">
                     <span class="text-md font-semibold">HTML</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt="CSS" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt="CSS" class="h-16 mb-4">
                     <span class="text-md font-semibold">CSS</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript" class="h-16 mb-4">
                     <span class="text-md font-semibold">JavaScript</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python" class="h-16 mb-4">
                     <span class="text-md font-semibold">Python</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" alt="PANDAS" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" alt="PANDAS" class="h-16 mb-4">
                     <span class="text-md font-semibold">Pandas</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Created_with_Matplotlib-logo.svg/1920px-Created_with_Matplotlib-logo.svg.png" alt="Matplotlib" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Created_with_Matplotlib-logo.svg/1920px-Created_with_Matplotlib-logo.svg.png" alt="Matplotlib" class="h-16 mb-4">
                     <span class="text-md font-semibold">Matplotlib</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn" class="h-16 mb-4">
                     <span class="text-md font-semibold">Scikit-learn</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/numpy/numpy-icon.svg" alt="NumPy" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/numpy/numpy-icon.svg" alt="NumPy" class="h-16 mb-4">
                     <span class="text-md font-semibold">NumPy</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="TensorFlow" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="TensorFlow" class="h-16 mb-4">
                     <span class="text-md font-semibold">TensorFlow</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" alt="PyTorch" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" alt="PyTorch" class="h-16 mb-4">
                     <span class="text-md font-semibold">PyTorch</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="Figma" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="Figma" class="h-16 mb-4">
                     <span class="text-md font-semibold">Figma</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/canva/canva-icon.svg" alt="Canva" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/canva/canva-icon.svg" alt="Canva" class="h-16 mb-4">
                     <span class="text-md font-semibold">Canva</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" class="h-16 mb-4">
                     <span class="text-md font-semibold">Git</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="GitHub" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="GitHub" class="h-16 mb-4">
                     <span class="text-md font-semibold">GitHub</span>
                 </div>
-                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center transform transition-transform duration-500 hover:scale-105 hover:bg-neon-lime hover:text-black">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="h-16 mb-4 filter grayscale transition-filter duration-500 group-hover:filter-none">
+                
+                <div class="skill-card p-6 bg-gray-850 rounded-3xl flex flex-col items-center justify-center text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="h-16 mb-4">
                     <span class="text-md font-semibold">C++</span>
                 </div>
+            </div>
+        </section>
+
+        <section id="experience-education" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">My Journey</h2>
+            
+            <div class="flex justify-center space-x-4 mb-12">
+                <button id="exp-tab" class="tab-btn active-tab py-2 px-6 rounded-full font-semibold text-sm md:text-base">Experience</button>
+                <button id="edu-tab" class="tab-btn py-2 px-6 rounded-full font-semibold text-sm md:text-base">Education</button>
+            </div>
+
+            <div class="relative max-w-3xl mx-auto">
+                <div class="timeline-line absolute top-0 bottom-0"></div>
+
+                <div id="experience-content">
+                    <div class="timeline-item relative pb-8">
+                        <div class="timeline-node-icon absolute">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v1H2.5A1.5 1.5 0 001 6.5V16a2 2 0 002 2h14a2 2 0 002-2V6.5A1.5 1.5 0 0017.5 5H16V4a2 2 0 00-2-2H6zM5 4.5A.5.5 0 015.5 4h9a.5.5 0 01.5.5V5H5V4.5z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <div class="timeline-content bg-gray-850 p-6 rounded-2xl shadow-lg">
+                            <span class="text-xs text-gray-400">Jun 2025 - Aug 2025 (3 mos)</span>
+                            <h3 class="text-xl font-bold text-neon-lime mt-1">AI/ML ENGINEER</h3>
+                            <h4 class="text-sm font-semibold text-gray-300">SmartInternz (Internship) - Remote</h4>
+                            <p class="text-sm mt-2">
+                                Completed a virtual internship program focused on Machine Learning applications and practical problem-solving.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item relative pb-8">
+                        <div class="timeline-node-icon absolute">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v1H2.5A1.5 1.5 0 001 6.5V16a2 2 0 002 2h14a2 2 0 002-2V6.5A1.5 1.5 0 0017.5 5H16V4a2 2 0 00-2-2H6zM5 4.5A.5.5 0 015.5 4h9a.5.5 0 01.5.5V5H5V4.5z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <div class="timeline-content bg-gray-850 p-6 rounded-2xl shadow-lg">
+                            <span class="text-xs text-gray-400">Jul 2024 - Oct 2024 (4 mos)</span>
+                            <h3 class="text-xl font-bold text-neon-lime mt-1">UI Designer</h3>
+                            <h4 class="text-sm font-semibold text-gray-300">Grootz (Internship) - Remote</h4>
+                            <p class="text-sm mt-2">
+                                My role involves designing the complete website for the project, including creating user-friendly layouts, wireframes, and visual designs. I'm focused on ensuring a seamless and engaging user experience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="education-content" class="hidden">
+                    <div class="timeline-item relative pb-8">
+                        <div class="timeline-node-icon absolute">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3.5a1 1 0 00.001 1.74l7 3.5a1 1 0 00.786 0l7-3.5a1 1 0 00.002-1.74l-7-3.5zM3 9.369L10 12.86l7-3.491V16a1 1 0 01-1 1H4a1 1 0 01-1-1V9.369z"></path></svg>
+                        </div>
+                        <div class="timeline-content bg-gray-850 p-6 rounded-2xl shadow-lg">
+                            <span class="text-xs text-gray-400">2022 - 2026</span>
+                            <h3 class="text-xl font-bold text-neon-lime mt-1">Bachelor of Technology - BTech, Artificial Intelligence</h3>
+                            <h4 class="text-sm font-semibold text-gray-300">ABESIT</h4>
+                            <p class="text-sm mt-2">
+                                Relevant coursework in Data Structures & Algorithms, AI, Machine Learning, Database Management Systems, and Software Engineering.
+                            </p>
+                        </div>
+                    </div>
+                     <div class="timeline-item relative pb-8">
+                        <div class="timeline-node-icon absolute">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3.5a1 1 0 00.001 1.74l7 3.5a1 1 0 00.786 0l7-3.5a1 1 0 00.002-1.74l-7-3.5zM3 9.369L10 12.86l7-3.491V16a1 1 0 01-1 1H4a1 1 0 01-1-1V9.369z"></path></svg>
+                        </div>
+                        <div class="timeline-content bg-gray-850 p-6 rounded-2xl shadow-lg">
+                            <span class="text-xs text-gray-400">Apr 2020 - Apr 2021</span>
+                            <h3 class="text-xl font-bold text-neon-lime mt-1">Higher Secondary</h3>
+                            <h4 class="text-sm font-semibold text-gray-300">Shah Faiz public school</h4>
+                            <p class="text-sm mt-2">
+                                Grade: 84.4
+                            </p>
+                        </div>
+                    </div>
+                     <div class="timeline-item relative pb-8">
+                        <div class="timeline-node-icon absolute">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3.5a1 1 0 00.001 1.74l7 3.5a1 1 0 00.786 0l7-3.5a1 1 0 00.002-1.74l-7-3.5zM3 9.369L10 12.86l7-3.491V16a1 1 0 01-1 1H4a1 1 0 01-1-1V9.369z"></path></svg>
+                        </div>
+                        <div class="timeline-content bg-gray-850 p-6 rounded-2xl shadow-lg">
+                            <span class="text-xs text-gray-400">Apr 2018 - Apr 2019</span>
+                            <h3 class="text-xl font-bold text-neon-lime mt-1">High school</h3>
+                            <h4 class="text-sm font-semibold text-gray-300">Shah Faiz public school</h4>
+                            <p class="text-sm mt-2">
+                                Grade: 81.6
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
+            <h2 class="text-3xl font-bold mb-12 text-center">Certifications</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Introduction to Deep Learning</h4>
+                    <p class="text-sm text-gray-400">Infosys Springboard</p>
+                </div>
+                
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Getting Started with Artificial Intelligence</h4>
+                    <p class="text-sm text-gray-400">IBM</p>
+                </div>
+                
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Mastering the Art of Prompting</h4>
+                    <p class="text-sm text-gray-400">IBM</p>
+                </div>
+
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Web development certificate using react</h4>
+                    <p class="text-sm text-gray-400">ABESIT</p>
+                </div>
+
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Introduction to Artificial Intelligence</h4>
+                    <p class="text-sm text-gray-400">IBM SkillsBuild</p>
+                </div>
+
+                <div class="certificate-card bg-gray-850 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/171717/d1d5db?text=Certificate+Image" alt="Certificate" class="rounded-lg w-full mb-4">
+                    <h4 class="font-semibold">Accenture Hack2 Skill bootcamp</h4>
+                    <p class="text-sm text-gray-400">Accenture in India</p>
+                </div>
+
             </div>
         </section>
 
@@ -596,6 +813,27 @@
             skillCards.forEach(card => {
                 observer.observe(card);
             });
+            
+            // --- NEW: Experience/Education Tab Logic ---
+            const expTab = document.getElementById('exp-tab');
+            const eduTab = document.getElementById('edu-tab');
+            const expContent = document.getElementById('experience-content');
+            const eduContent = document.getElementById('education-content');
+
+            expTab.addEventListener('click', () => {
+                expTab.classList.add('active-tab');
+                eduTab.classList.remove('active-tab');
+                expContent.classList.remove('hidden');
+                eduContent.classList.add('hidden');
+            });
+
+            eduTab.addEventListener('click', () => {
+                eduTab.classList.add('active-tab');
+                expTab.classList.remove('active-tab');
+                eduContent.classList.remove('hidden');
+                expContent.classList.add('hidden');
+            });
+
 
             // --- Theme Toggle Logic (Updated) ---
             const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');

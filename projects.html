@@ -3,615 +3,605 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UMAR - Projects</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>UMAR — Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Dark Theme (Default) */
-            --background-color: #0d0d0d;
-            --text-color: #d1d5db;
-            --accent-color: #ccff00;
-            --card-background-color: #171717;
-            --contact-background-color: #ccff00;
-            --contact-text-color: #0d0d0d;
-            --contact-input-bg: #262626;
-            --contact-input-color: #d1d5db;
-            --hero-bg-text-color: #ccff00;
-            --hero-bg-overlay: rgba(13, 13, 13, 0.6);
-            --grid-color: rgba(255, 255, 255, 0.05);
-            --nav-bg: rgba(0, 0, 0, 0.6);
-            --nav-link-color: #d1d5db;
-            --nav-link-hover-color: #ccff00;
-            --nav-button-hover-bg: rgba(255, 255, 255, 0.1);
+            --bg: #080808;
+            --bg-2: #0f0f0f;
+            --bg-3: #161616;
+            --bg-4: #1e1e1e;
+            --text: #e8e8e8;
+            --text-muted: #6b6b6b;
+            --text-subtle: #3a3a3a;
+            --accent: #c8ff00;
+            --accent-dim: rgba(200, 255, 0, 0.1);
+            --accent-glow: rgba(200, 255, 0, 0.25);
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(200,255,0,0.3);
+            --radius: 20px;
+            --radius-sm: 12px;
         }
-
-        body.light-mode {
-            /* Light Theme */
-            --background-color: #f3f4f6;
-            --text-color: #1f2937;
-            --accent-color: #0077b6; /* A professional blue */
-            --card-background-color: #ffffff;
-            --contact-background-color: #1f2937;
-            --contact-text-color: #ffffff;
-            --contact-input-bg: #e5e7eb;
-            --contact-input-color: #1f2937;
-            --hero-bg-text-color: #1f2937;
-            --hero-bg-overlay: rgba(243, 244, 246, 0.85);
-            --grid-color: rgba(0, 0, 0, 0.05);
-            --nav-bg: rgba(255, 255, 255, 0.6);
-            --nav-link-color: #1f2937;
-            --nav-link-hover-color: #0077b6;
-            --nav-button-hover-bg: rgba(0, 0, 0, 0.05);
+        body.light {
+            --bg: #f5f5f0; --bg-2: #eeeeea; --bg-3: #e5e5e0; --bg-4: #dcdcd6;
+            --text: #111111; --text-muted: #666666; --text-subtle: #aaaaaa;
+            --accent: #1a1a1a; --accent-dim: rgba(26,26,26,0.08); --accent-glow: rgba(26,26,26,0.15);
+            --border: rgba(0,0,0,0.08); --border-hover: rgba(26,26,26,0.4);
         }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            cursor: none;
         }
 
-        /* General styling using variables */
-        .text-neon-lime {
-            color: var(--accent-color);
-        }
-        .bg-neon-lime {
-            background-color: var(--accent-color);
-        }
-        .bg-gray-850 {
-            background-color: var(--card-background-color);
-        }
-        body.light-mode .bg-gray-850 {
-            background-color: var(--card-background-color);
-        }
-        
-        /* Navigation Bar Styles (from index.html) */
-        .header-transparent {
-            background-color: var(--nav-bg);
-            backdrop-filter: blur(8px);
-        }
-        .header-transparent a {
-            color: var(--nav-link-color);
-            transition: color 0.3s ease;
-        }
-        .header-transparent a:hover {
-            color: var(--nav-link-hover-color);
-        }
-        .header-transparent .text-neon-lime {
-            color: var(--nav-link-hover-color);
-        }
-        .header-transparent .theme-toggle-btn {
-            background-color: transparent;
-        }
-        .header-transparent .theme-toggle-btn:hover {
-            background-color: var(--nav-button-hover-bg);
-        }
-        
-        /* Mobile Menu Text (from index.html) */
-        #mobile-menu a {
-            color: var(--nav-link-color);
-        }
-        #mobile-menu a:hover {
-            color: var(--nav-link-hover-color);
-        }
-        #mobile-menu {
-             background-color: var(--background-color);
-        }
-        
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s, opacity 0.3s linear;
-        }
-        .modal-overlay.open {
-            visibility: visible;
-            opacity: 1;
-        }
-        .modal-content {
-            background-color: var(--card-background-color);
-            color: var(--text-color);
-            padding: 2rem;
-            border-radius: 1.5rem;
-            width: 90%;
-            max-width: 600px;
+        /* CURSOR */
+        .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; transform: translate(-50%, -50%); }
+        .cursor-follower { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease; transform: translate(-50%, -50%); opacity: 0.5; }
+        .cursor-follower.expand { width: 60px; height: 60px; opacity: 0.2; }
+        @media (pointer: coarse) { .cursor, .cursor-follower { display: none; } body { cursor: auto; } }
+
+        /* NOISE */
+        body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9997; opacity: 0.4; }
+
+        /* HEADER */
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(8,8,8,0.7); border-bottom: 1px solid var(--border); transition: background 0.4s ease; }
+        body.light header { background: rgba(245,245,240,0.8); }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--accent); text-decoration: none; letter-spacing: -0.02em; }
+        nav { display: flex; align-items: center; gap: 36px; }
+        nav a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s ease; position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s ease; }
+        nav a:hover, nav a.active { color: var(--accent); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        .header-actions { display: flex; align-items: center; gap: 16px; }
+        .theme-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: none; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .mobile-btn { display: none; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text); cursor: none; align-items: center; justify-content: center; }
+
+        /* MOBILE NAV */
+        .mobile-nav { position: fixed; inset: 0; z-index: 999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+        .mobile-nav.open { transform: translateX(0); }
+        .mobile-nav a { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--text); text-decoration: none; transition: color 0.3s ease; }
+        .mobile-nav a:hover, .mobile-nav a.active { color: var(--accent); }
+        .mobile-close { position: absolute; top: 24px; right: 24px; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%; background: transparent; color: var(--text); cursor: none; display: flex; align-items: center; justify-content: center; }
+
+        /* PAGE HERO */
+        .page-hero {
+            padding: 160px 48px 80px;
             position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease-in-out;
+            overflow: hidden;
         }
-        .modal-overlay.open .modal-content {
-            transform: scale(1);
-        }
-        .modal-content .text-neon-lime {
-             color: var(--accent-color);
-        }
-        .close-button {
+        .page-hero-grid {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            cursor: pointer;
+            inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 30%, transparent 100%);
+            pointer-events: none;
         }
-        
-        .tech-tag {
-            background-color: #262626; /* Kept specific color for contrast */
-            color: #ccff00; /* Kept specific color for contrast */
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 500;
+        .page-hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+        .page-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .page-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+        .page-title { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; }
+        .page-title .outline { -webkit-text-stroke: 2px var(--text-subtle); color: transparent; }
+        .page-subtitle { margin-top: 28px; color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+
+        /* FILTER BAR */
+        .filter-bar { padding: 0 48px 48px; max-width: calc(1200px + 96px); margin: 0 auto; }
+        .filter-inner { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-btn { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: none; transition: all 0.3s ease; }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--accent); color: #080808; border-color: var(--accent); }
+
+        /* PROJECTS GRID */
+        .projects-section { padding: 0 48px 120px; }
+        .projects-container { max-width: 1200px; margin: 0 auto; }
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+        /* PROJECT CARD */
+        .project-card {
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: none;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(24px);
+            display: flex;
+            flex-direction: column;
         }
-        body.light-mode .tech-tag {
-            background-color: #d1d5db;
-            color: #1f2937;
+        .project-card.visible { opacity: 1; transform: translateY(0); }
+        .project-card:hover { border-color: var(--border-hover); transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0,0,0,0.25), 0 0 0 1px var(--border-hover); }
+        .project-card.hidden-card { display: none; }
+
+        .project-thumb {
+            width: 100%; height: 200px;
+            background: var(--bg-4);
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .project-thumb-bg {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--accent-dim), transparent 60%);
+        }
+        .project-thumb-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem; font-weight: 700;
+            color: var(--text-subtle);
+            letter-spacing: 0.05em;
+            position: relative; z-index: 1;
+            text-align: center; padding: 0 16px;
+        }
+        .project-thumb img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+        .project-overlay {
+            position: absolute; inset: 0;
+            background: rgba(200,255,0,0.06);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease; z-index: 2;
+        }
+        .project-overlay span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--accent); border: 1px solid var(--accent);
+            padding: 8px 20px; border-radius: 100px; backdrop-filter: blur(8px);
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+
+        .project-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+        .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--accent); background: var(--accent-dim);
+            padding: 3px 10px; border-radius: 100px;
+        }
+        .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
+        .project-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; flex: 1; }
+        .project-category-label {
+            margin-top: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-subtle);
         }
 
-        /* Animations (from previous step) */
-        .project-card {
-            background-color: var(--card-background-color);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, 
-                        transform 0.6s ease-out, 
-                        box-shadow 0.3s ease,
-                        background-color 0.3s ease;
+        /* COUNT BADGE */
+        .results-count { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 32px; }
+        .results-count span { color: var(--accent); }
+
+        /* MODAL */
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 24px; }
+        .modal-backdrop.open { opacity: 1; visibility: visible; }
+        .modal-box { background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--radius); padding: 44px; max-width: 600px; width: 100%; position: relative; transform: scale(0.9) translateY(20px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; }
+        .modal-backdrop.open .modal-box { transform: scale(1) translateY(0); }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; background: transparent; color: var(--text-muted); cursor: none; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+        .modal-category { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+        .modal-title { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; color: var(--accent); margin-bottom: 20px; line-height: 1.1; }
+        .modal-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 10px; margin-top: 24px; }
+        .modal-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+        .modal-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+        .modal-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(200,255,0,0.15); }
+        .modal-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--accent); color: #080808; padding: 12px 24px; border-radius: 100px; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: all 0.3s ease; }
+        .modal-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+
+        /* FOOTER */
+        footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        footer p { font-size: 0.78rem; color: var(--text-muted); }
+        .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--accent); font-size: 1.1rem; text-decoration: none; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            header { padding: 18px 24px; }
+            nav { display: none; }
+            .mobile-btn { display: flex; }
+            .page-hero { padding: 120px 24px 60px; }
+            .filter-bar { padding: 0 24px 40px; }
+            .projects-section { padding: 0 24px 80px; }
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            footer { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
         }
-        .project-card.animate {
-            opacity: 1;
-            transform: translateY(0);
+        @media (max-width: 580px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .modal-box { padding: 28px 24px; }
         }
-        .project-card.animate:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        body.light-mode .project-card.animate:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        .bg-grid-white {
-             background-image: linear-gradient(0deg, var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-             background-size: 20px 20px;
-        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    
-    <header class="py-4 px-8 md:px-16 flex justify-between items-center text-sm sticky top-0 z-50 header-transparent">
-        <a href="index.html" class="text-neon-lime font-bold text-lg">UMAR</a>
-        <nav class="hidden md:flex items-center space-x-8">
-            <a href="index.html#about" class="hover:text-neon-lime transition-colors">ABOUT</a>
-            <a href="index.html#experience-education" class="hover:text-neon-lime transition-colors">EXPERIENCE</a>
-            <a href="index.html#certifications" class="hover:text-neon-lime transition-colors">CERTIFICATIONS</a>
-            <a href="projects.html" class="text-neon-lime font-medium transition-colors">WORK</a>
-            <a href="index.html#contact" class="hover:text-neon-lime transition-colors">CONTACT</a>
-           <button class="theme-toggle-btn p-2 rounded-full hover:bg-[var(--nav-button-hover-bg)] transition-colors flex items-center justify-center">
-             <svg class="sun-icon w-8 h-8 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                       d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-             </svg>
-             <svg class="moon-icon w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                       d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-             </svg>
-         </button>
-        </nav>
-       <div class="md:hidden z-50">
-           <button id="mobile-menu-button" class="text-neon-lime focus:outline-none p-2 bg-black/70 rounded-md hover:bg-black/90">
-               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-               </svg>
-           </button>
-       </div>
-    </header>
+<body>
 
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black z-40 p-8">
-        <button id="close-mobile-menu" class="absolute top-4 right-4 text-neon-lime focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <div class="flex flex-col items-center justify-center h-full">
-            <nav class="flex flex-col items-center space-y-8 text-xl">
-                <a href="index.html#about" class="text-white hover:text-neon-lime transition-colors">ABOUT</a>
-                <a href="index.html#experience-education" class="text-white hover:text-neon-lime transition-colors">EXPERIENCE</a>
-                <a href="index.html#certifications" class="text-white hover:text-neon-lime transition-colors">CERTIFICATIONS</a>
-                <a href="projects.html" class="text-neon-lime font-medium transition-colors">WORK</a>
-                <a href="index.html#contact" class="text-white hover:text-neon-lime transition-colors">CONTACT</a>
-            </nav>
-            <button class="theme-toggle-btn p-2 rounded-full transition-colors mt-12">
-                <svg class="sun-icon w-8 h-8 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1m-16 0H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-                <svg class="moon-icon w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                </svg>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">UMAR</a>
+        <nav>
+            <a href="index.html#about">About</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="index.html#experience-education">Journey</a>
+            <a href="index.html#certifications">Certs</a>
+            <a href="projects.html" class="active">Work</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+                <svg id="sunIcon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="hidden"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <svg id="moonIcon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+            <button class="mobile-btn" id="menuBtn" aria-label="Open menu">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-close" id="menuClose">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#experience-education">Journey</a>
+        <a href="index.html#certifications">Certs</a>
+        <a href="projects.html" class="active">Work</a>
+        <a href="index.html#contact">Contact</a>
     </div>
-    <main class="flex-grow">
-        <section id="projects" class="container mx-auto px-8 md:px-16 py-16 md:py-24">
-            <h1 class="text-4xl md:text-5xl font-bold mb-12 text-center text-neon-lime">All Projects</h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="1">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Portfolio" alt="Project 1" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Portfolio</h3>
-                        <p class="text-sm text-gray-400">
-                            PERSONAL PORTFOLIO WEBSITE.
-                        </p>
-                    </div>
-                </div>
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="2">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=ANEMIA+DETECTION" alt="Project 2" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">ANEMIA DETECTION</h3>
-                        <p class="text-sm text-gray-400">
-                            RESEARCH FOR DETECTION ON ANEMIA.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="3">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=INTERNSHIP+AGGREGATOR" alt="Project 3" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">INTERNSHIP AGGREGATOR</h3>
-                        <p class="text-sm text-gray-400">
-                            FINDING INTERNSHIP IN A CLICK.
-                        </p>
-                    </div>
-                </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="4">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Finance+Website" alt="Finance Website Design" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Design for Finance Website</h3>
-                        <p class="text-sm text-gray-400">
-                            A UI/UX design for a finance platform.
-                        </p>
-                    </div>
-                </div>
+    <main>
+        <!-- PAGE HERO -->
+        <div class="page-hero">
+            <div class="page-hero-grid"></div>
+            <div class="page-hero-content">
+                <p class="page-eyebrow">All Work</p>
+                <h1 class="page-title">
+                    Selected<br>
+                    <span class="outline">Projects</span>
+                </h1>
+                <p class="page-subtitle">A collection of ML systems, automation tools, and UI/UX designs built with purpose and craft.</p>
+            </div>
+        </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="5">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Harry+Potter+Logo" alt="Harry Potter Logo" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Logo (Harry Potter Theme)</h3>
-                        <p class="text-sm text-gray-400">
-                            A logo design inspired by the Harry Potter theme.
-                        </p>
-                    </div>
-                </div>
+        <!-- FILTER BAR -->
+        <div class="filter-bar">
+            <div class="filter-inner">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="ui">UI/UX Design</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+            </div>
+        </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="6">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Pizza+Hut+Design" alt="Pizza Hut Design" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Website Design for Pizza Hut</h3>
-                        <p class="text-sm text-gray-400">
-                            A website redesign concept for Pizza Hut.
-                        </p>
-                    </div>
-                </div>
+        <!-- PROJECTS GRID -->
+        <section class="projects-section">
+            <div class="projects-container">
+                <p class="results-count" id="resultsCount">Showing <span id="countNum">10</span> projects</p>
+                <div class="projects-grid" id="projectsGrid">
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="7">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Shoe+Website" alt="Shoe Website" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Design for Shoe Website</h3>
-                        <p class="text-sm text-gray-400">
-                            Landing page design for a shoe brand.
-                        </p>
+                    <!-- 1 -->
+                    <div class="project-card" data-id="1" data-category="web">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">PORTFOLIO</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span></div>
+                            <h3 class="project-title">Portfolio Website</h3>
+                            <p class="project-desc">Personal portfolio showcasing projects, skills, and experience with a clean, modern design system.</p>
+                            <p class="project-category-label">Web Development</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="8">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Portfolio+Design" alt="Portfolio Design" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Personal Portfolio Design</h3>
-                        <p class="text-sm text-gray-400">
-                            A personal portfolio UI/UX concept.
-                        </p>
+                    <!-- 2 -->
+                    <div class="project-card" data-id="2" data-category="ml">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">ANEMIA DETECTION</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">ML</span><span class="project-tag">Flask</span></div>
+                            <h3 class="project-title">Anemia Detection</h3>
+                            <p class="project-desc">ML system comparing 6 algorithms to detect anemia from patient health parameters with high accuracy.</p>
+                            <p class="project-category-label">Machine Learning</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="9">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Grootz+Intelligence" alt="Company Website" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Website for a Company</h3>
-                        <p class="text-sm text-gray-400">
-                            A website landing page for "Grootz Intelligence".
-                        </p>
+                    <!-- 3 -->
+                    <div class="project-card" data-id="3" data-category="ml">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">AGGREGATOR</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">Scraping</span></div>
+                            <h3 class="project-title">Internship Aggregator</h3>
+                            <p class="project-desc">Automated tool that scrapes and filters internship listings from multiple platforms in real-time.</p>
+                            <p class="project-category-label">Machine Learning · Automation</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="project-card bg-gray-850 rounded-3xl overflow-hidden shadow-lg cursor-pointer" data-id="10">
-                    <img src="https://placehold.co/600x400/262626/ccff00?text=Internship+Finder" alt="Internship Finder" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Internship Finder</h3>
-                        <p class="text-sm text-gray-400">
-                            A UI/UX design for an internship finding platform.
-                        </p>
+                    <!-- 4 -->
+                    <div class="project-card" data-id="4" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">FINANCE UI</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">UI/UX</span></div>
+                            <h3 class="project-title">Finance Website Design</h3>
+                            <p class="project-desc">Modern and clean UI/UX design concept for a financial services platform, focusing on clarity and trust.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
                     </div>
+
+                    <!-- 5 -->
+                    <div class="project-card" data-id="5" data-category="branding">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">LOGO DESIGN</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Branding</span><span class="project-tag">Illustrator</span></div>
+                            <h3 class="project-title">Harry Potter Theme Logo</h3>
+                            <p class="project-desc">Logo design for "Hacknovate 6" inspired by the magical Harry Potter universe with custom typography.</p>
+                            <p class="project-category-label">Branding · Logo Design</p>
+                        </div>
+                    </div>
+
+                    <!-- 6 -->
+                    <div class="project-card" data-id="6" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">PIZZA HUT</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">UI/UX</span></div>
+                            <h3 class="project-title">Pizza Hut Website Redesign</h3>
+                            <p class="project-desc">Website redesign concept for Pizza Hut with a modern layout to showcase offers and menu items.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
+                    </div>
+
+                    <!-- 7 -->
+                    <div class="project-card" data-id="7" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">SHOE BRAND</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">Web Design</span></div>
+                            <h3 class="project-title">Shoe Website Landing Page</h3>
+                            <p class="project-desc">Landing page for Air Max — bold, minimalist layout to highlight the product and drive conversions.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
+                    </div>
+
+                    <!-- 8 -->
+                    <div class="project-card" data-id="8" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">PORTFOLIO UI</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">UI/UX</span></div>
+                            <h3 class="project-title">Personal Portfolio Design</h3>
+                            <p class="project-desc">Portfolio UI/UX concept featuring a friendly and clean layout with custom avatar illustration.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
+                    </div>
+
+                    <!-- 9 -->
+                    <div class="project-card" data-id="9" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">GROOTZ</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">Web Design</span></div>
+                            <h3 class="project-title">Grootz Intelligence Website</h3>
+                            <p class="project-desc">Landing page concept for "Grootz Intelligence" featuring a dark, professional aesthetic for the brand.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
+                    </div>
+
+                    <!-- 10 -->
+                    <div class="project-card" data-id="10" data-category="ui">
+                        <div class="project-thumb">
+                            <div class="project-thumb-bg"></div>
+                            <span class="project-thumb-label">INTERNSHIP UI</span>
+                            <div class="project-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">UI/UX</span></div>
+                            <h3 class="project-title">Internship Finder Platform</h3>
+                            <p class="project-desc">UI/UX design for an internship-finding platform with a welcoming, easy-to-navigate interface for students.</p>
+                            <p class="project-category-label">UI/UX Design</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="project-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-modal-button" class="close-button">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-logo">UMAR</a>
+        <p>Designing for extraordinary people.</p>
+        <div class="footer-links">
+            <a href="index.html#about">About</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal-backdrop">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            <h3 id="modal-title" class="text-3xl font-bold mb-4 text-neon-lime"></h3>
-            
-            <h4 class="text-xl font-semibold mb-2">Description</h4>
-            <p id="modal-description" class="text-sm mb-4"></p>
-
-            <h4 class="text-xl font-semibold mb-2">Technology Stack</h4>
-            <div id="modal-tech-stack" class="flex flex-wrap gap-2 mb-4"></div>
-
-            <a id="modal-github-link" href="#" target="_blank" class="block mt-4 text-neon-lime hover:underline">
+            <p class="modal-category" id="modalCategory"></p>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-section-label">Description</p>
+            <p class="modal-desc" id="modalDesc"></p>
+            <p class="modal-section-label">Technology Stack</p>
+            <div class="modal-stack" id="modalStack"></div>
+            <a class="modal-link" id="modalLink" href="#" target="_blank">
                 View Project
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </a>
         </div>
     </div>
 
-    <footer class="text-center py-8 text-xs text-gray-500">
-        <div class="relative w-full overflow-hidden h-24 mt-16">
-            <div class="absolute inset-0 bg-grid-white [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]"></div>
-            <h2 class="absolute inset-0 flex items-center justify-center text-4xl font-bold" style="color: var(--grid-color); opacity: 0.5;">
-                Designing for extraordinary people.
-            </h2>
-        </div>
-        <p class="mt-4">&copy; 2025 UMAR. All Rights Reserved.</p>
-    </footer>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- START: NEW JS (FROM INDEX.HTML) ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-            const mobileMenu = document.getElementById('mobile-menu');
+    (function(){
+        'use strict';
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-
-            closeMobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-
-            // Close menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-
-            // --- Theme Toggle Logic (from index.html) ---
-            const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
-            const sunIcons = document.querySelectorAll('.sun-icon');
-            const moonIcons = document.querySelectorAll('.moon-icon');
-            const header = document.querySelector('header'); // header is used in applyTheme
-
-            function applyTheme(theme) {
-                if (theme === 'light-mode') {
-                    document.body.classList.add('light-mode');
-                    sunIcons.forEach(icon => icon.classList.remove('hidden'));
-                    moonIcons.forEach(icon => icon.classList.add('hidden'));
-                } else {
-                    document.body.classList.remove('light-mode');
-                    sunIcons.forEach(icon => icon.classList.add('hidden'));
-                    moonIcons.forEach(icon => icon.classList.remove('hidden'));
-                }
-            }
-            
-            // Check for saved theme preference
-            const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) {
-                applyTheme(currentTheme);
-            } else {
-                applyTheme('dark-mode'); // Default theme
-            }
-
-            themeToggleBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    let newTheme = 'dark-mode';
-                    if (!document.body.classList.contains('light-mode')) {
-                        newTheme = 'light-mode';
-                    }
-                    localStorage.setItem('theme', newTheme);
-                    applyTheme(newTheme);
-                });
-            });
-            // --- END: NEW JS (FROM INDEX.HTML) ---
-
-
-            // --- Scroll-in Animation Logic (from previous step) ---
-            const projectCardsToAnimate = document.querySelectorAll('.project-card');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            projectCardsToAnimate.forEach(card => {
-                observer.observe(card);
-            });
-
-
-            // --- Project Data (ALL 10 PROJECTS) ---
-            const projectsData = [
-                {
-                    id: 1,
-                    title: 'Portfolio',
-                    description: 'The Portfolio project involved a deep-dive research into creating a responsive and elegant personal website. The goal was to showcase my skills in UI/UX design and front-end development, ensuring a seamless experience across all devices. This project utilized HTML, Tailwind CSS, and vanilla JavaScript to achieve its clean, modern look.',
-                    techStack: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
-                    githubLink: 'https://github.com/Umariqbal777/PORTFOLIO-WEBSITE'
-                },
-                {
-                    id: 2,
-                    title: 'ANEMIA DETECTION',
-                    description: 'A machine learning-based system that predicts the likelihood of anemia based on patient health parameters. The project compares multiple models — Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, and Gradient Boosting — and deploys the best-performing model (Gradient Boosting Classifier) for accurate predictions.    ',
-                    techStack: ['HTML', 'PYTHON', 'FLASK', 'PANDAS', 'SCIKIT-LEARN', 'MATPLOTLIB', 'SEABORN', 'JUPYTER NOTEBOOK'],
-                    githubLink: 'https://github.com/Umariqbal777/ANEMIA-DETECTION'
-                },
-                {
-                    id: 3, 
-                    title: 'INTERNSHIP AGGREGATOR',
-                    description: 'An automated job-hunting tool that scrapes, parses, and aggregates internship postings from multiple online sources. It filters opportunities based on user-defined keywords (like \'Software Engineer\' or \'Remote\'), saving hours of manual searching and ensuring no new listing is missed.',
-                    techStack: ['HTML', 'PYTHON', 'FLASK', 'PANDAS', 'SCIKIT-LEARN', 'MATPLOTLIB', 'SEABORN', 'JUPYTER NOTEBOOK'],
-                    githubLink: 'https(s)://github.com/Umariqbal777/internshipdetector' // Corrected typo
-                },
-                {
-                    id: 4,
-                    title: 'Design for Finance Website',
-                    description: 'A modern and clean UI/UX design concept for a financial services website, focusing on clarity and user trust. Designed in Figma.',
-                    techStack: ['UI Design', 'UX Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608206-DESIGN-FOR-FINANCE-WEBSITE'
-                },
-                {
-                    id: 5,
-                    title: 'Logo Based on Harry Potter Theme',
-                    description: 'A logo design for "Hacknovate 6" inspired by the magical theme of Harry Potter, featuring custom typography and thematic elements.',
-                    techStack: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
-                    githubLink: 'https://dribbble.com/shots/26608195-LOGO-BASED-ON-HARRY-POTTER-THEME'
-                },
-                {
-                    id: 6,
-                    title: 'Website Design for Pizza Hut',
-                    description: 'A website redesign concept for Pizza Hut, focusing on a modern, visually-appealing layout to showcase special offers and menu items.',
-                    techStack: ['UI Design', 'UX Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608184-Website-design-for-pizza-hut'
-                },
-                {
-                    id: 7,
-                    title: 'Design for Shoe Website',
-                    description: 'A landing page design for a shoe website (Air Max), featuring a bold, minimalist layout to highlight the product.',
-                    techStack: ['UI Design', 'Web Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608161-Design-for-shoe-website'
-                },
-                {
-                    id: 8,
-                    title: 'Personal Portfolio Design',
-                    description: 'A personal portfolio UI/UX design concept, featuring a friendly and clean layout with a custom avatar.',
-                    techStack: ['UI Design', 'UX Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608153-Personal-portfolio-design'
-                },
-                {
-                    id: 9,
-                    title: 'Website for a Company',
-                    description: 'A website landing page concept for a company called "Grootz Intelligence", featuring a dark, professional aesthetic.',
-                    techStack: ['UI Design', 'Web Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608144-Website-for-a-company'
-                },
-                {
-                    id: 10,
-                    title: 'Internship Finder',
-                    description: 'A UI/UX design for an "Internship Finder" platform, creating a welcoming and easy-to-navigate interface for students.',
-                    techStack: ['UI Design', 'UX Design', 'Figma'],
-                    githubLink: 'https://dribbble.com/shots/26608136-Internship-finder'
-                }
-            ];
-
-            // --- Modal Logic (Unchanged, but now uses CSS variables) ---
-            const projectCards = document.querySelectorAll('.project-card');
-            const projectModal = document.getElementById('project-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            const modalTechStack = document.getElementById('modal-tech-stack');
-            const modalGithubLink = document.getElementById('modal-github-link');
-            const closeModalButton = document.getElementById('close-modal-button');
-
-            function openModal(title, description, techStack, githubLink) {
-                if (modalTitle) modalTitle.textContent = title;
-                if (modalDescription) modalDescription.textContent = description;
-
-                if (modalTechStack) {
-                    modalTechStack.innerHTML = '';
-                    techStack.forEach(tech => {
-                        const techSpan = document.createElement('span');
-                        techSpan.textContent = tech;
-                        techSpan.classList.add('tech-tag');
-                        modalTechStack.appendChild(techSpan);
-                    });
-                }
-
-                if (modalGithubLink) {
-                    if (githubLink) {
-                        modalGithubLink.href = githubLink;
-                        modalGithubLink.style.display = 'block';
-                        
-                        if (githubLink.includes('dribbble.com')) {
-                            modalGithubLink.textContent = 'View on Dribbble';
-                        } else {
-                            modalGithubLink.textContent = 'View on GitHub';
-                        }
-
-                    } else {
-                        modalGithubLink.style.display = 'none';
-                    }
-                }
-
-                if (projectModal) {
-                    projectModal.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeModal() {
-                if (projectModal) {
-                    projectModal.classList.remove('open');
-                    document.body.style.overflow = 'auto';
-                }
-            }
-
-            projectCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const projectId = parseInt(card.dataset.id);
-                    const project = projectsData.find(p => p.id === projectId);
-                    if (project) {
-                        openModal(project.title, project.description, project.techStack, project.githubLink);
-                    }
-                });
-            });
-
-            if (closeModalButton) {
-                closeModalButton.addEventListener('click', closeModal);
-            }
-            
-            if (projectModal) {
-                projectModal.addEventListener('click', (event) => {
-                    if (event.target === projectModal) {
-                        closeModal();
-                    }
-                });
-            }
+        // CURSOR
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursorFollower');
+        let mx = -100, my = -100, fx = -100, fy = -100;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        function animCursor() {
+            cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+            fx += (mx-fx)*0.12; fy += (my-fy)*0.12;
+            follower.style.left = fx+'px'; follower.style.top = fy+'px';
+            requestAnimationFrame(animCursor);
+        }
+        animCursor();
+        document.querySelectorAll('a,button,.project-card').forEach(el => {
+            el.addEventListener('mouseenter', () => follower.classList.add('expand'));
+            el.addEventListener('mouseleave', () => follower.classList.remove('expand'));
         });
+
+        // THEME
+        const themeBtn = document.getElementById('themeBtn');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        let isLight = localStorage.getItem('theme') === 'light';
+        function applyTheme() {
+            document.body.classList.toggle('light', isLight);
+            sunIcon.classList.toggle('hidden', !isLight);
+            moonIcon.classList.toggle('hidden', isLight);
+        }
+        applyTheme();
+        themeBtn.addEventListener('click', () => { isLight = !isLight; localStorage.setItem('theme', isLight ? 'light' : 'dark'); applyTheme(); });
+
+        // MOBILE NAV
+        const menuBtn = document.getElementById('menuBtn');
+        const menuClose = document.getElementById('menuClose');
+        const mobileNav = document.getElementById('mobileNav');
+        menuBtn.addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
+        const closeNav = () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; };
+        menuClose.addEventListener('click', closeNav);
+        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+        // PROJECT DATA
+        const projects = {
+            1: { category: 'Web Development', title: 'Portfolio Website', desc: 'A deep-dive into creating a responsive and elegant personal website. The goal was to showcase skills in UI/UX design and front-end development, ensuring a seamless experience across all devices. This project utilized HTML, Tailwind CSS, and vanilla JavaScript to achieve its clean, modern look.', stack: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'], link: 'https://github.com/Umariqbal777/PORTFOLIO-WEBSITE', linkLabel: 'View on GitHub' },
+            2: { category: 'Machine Learning', title: 'Anemia Detection', desc: 'A machine learning-based system that predicts the likelihood of anemia based on patient health parameters. The project compares multiple models — Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, and Gradient Boosting — and deploys the best-performing model (Gradient Boosting Classifier) for accurate predictions.', stack: ['Python', 'Flask', 'Pandas', 'Scikit-Learn', 'Matplotlib', 'Seaborn', 'Jupyter Notebook'], link: 'https://github.com/Umariqbal777/ANEMIA-DETECTION', linkLabel: 'View on GitHub' },
+            3: { category: 'Machine Learning · Automation', title: 'Internship Aggregator', desc: "An automated job-hunting tool that scrapes, parses, and aggregates internship postings from multiple online sources. It filters opportunities based on user-defined keywords (like 'Software Engineer' or 'Remote'), saving hours of manual searching and ensuring no new listing is missed.", stack: ['Python', 'Flask', 'Pandas', 'BeautifulSoup', 'Requests', 'Jupyter Notebook'], link: 'https://github.com/Umariqbal777/internshipdetector', linkLabel: 'View on GitHub' },
+            4: { category: 'UI/UX Design', title: 'Finance Website Design', desc: 'A modern and clean UI/UX design concept for a financial services website, focusing on clarity and user trust. The design prioritizes readable data visualization and a calm, professional color palette. Designed entirely in Figma.', stack: ['UI Design', 'UX Design', 'Figma', 'Prototyping'], link: 'https://dribbble.com/shots/26608206-DESIGN-FOR-FINANCE-WEBSITE', linkLabel: 'View on Dribbble' },
+            5: { category: 'Branding · Logo Design', title: 'Harry Potter Theme Logo', desc: 'A logo design for "Hacknovate 6" inspired by the magical theme of Harry Potter, featuring custom typography, thematic wand and star elements. The design captures the essence of the wizarding world while keeping it modern and event-appropriate.', stack: ['Logo Design', 'Graphic Design', 'Adobe Illustrator', 'Typography'], link: 'https://dribbble.com/shots/26608195-LOGO-BASED-ON-HARRY-POTTER-THEME', linkLabel: 'View on Dribbble' },
+            6: { category: 'UI/UX Design', title: 'Pizza Hut Website Redesign', desc: 'A website redesign concept for Pizza Hut, focusing on a modern, visually-appealing layout to showcase special offers and menu items. The design emphasizes bold food imagery with a clean white and red palette that stays true to the brand.', stack: ['UI Design', 'UX Design', 'Figma', 'Responsive Design'], link: 'https://dribbble.com/shots/26608184-Website-design-for-pizza-hut', linkLabel: 'View on Dribbble' },
+            7: { category: 'UI/UX Design', title: 'Shoe Website Landing Page', desc: 'A landing page design for a shoe website (Air Max), featuring a bold, minimalist layout to highlight the product. The design uses dramatic typography overlaying a hero product shot to create visual impact.', stack: ['UI Design', 'Web Design', 'Figma', 'Product Design'], link: 'https://dribbble.com/shots/26608161-Design-for-shoe-website', linkLabel: 'View on Dribbble' },
+            8: { category: 'UI/UX Design', title: 'Personal Portfolio Design', desc: 'A personal portfolio UI/UX design concept, featuring a friendly and clean layout with a custom avatar illustration. The design balances personality with professionalism, making it ideal for creative professionals.', stack: ['UI Design', 'UX Design', 'Figma', 'Illustration'], link: 'https://dribbble.com/shots/26608153-Personal-portfolio-design', linkLabel: 'View on Dribbble' },
+            9: { category: 'UI/UX Design', title: 'Grootz Intelligence Website', desc: 'A website landing page concept for "Grootz Intelligence", featuring a dark, professional aesthetic that communicates trust and innovation. The design was created during the UI Design internship at Grootz.', stack: ['UI Design', 'Web Design', 'Figma', 'Dark Theme'], link: 'https://dribbble.com/shots/26608144-Website-for-a-company', linkLabel: 'View on Dribbble' },
+            10: { category: 'UI/UX Design', title: 'Internship Finder Platform', desc: 'A UI/UX design for an "Internship Finder" platform, creating a welcoming and easy-to-navigate interface for students. The design focuses on reducing friction in the search process with clear filters, cards, and a friendly onboarding flow.', stack: ['UI Design', 'UX Design', 'Figma', 'User Research'], link: 'https://dribbble.com/shots/26608136-Internship-finder', linkLabel: 'View on Dribbble' }
+        };
+
+        // FILTER
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.project-card');
+        const countNum = document.getElementById('countNum');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                let count = 0;
+                cards.forEach(card => {
+                    const cat = card.dataset.category;
+                    const match = filter === 'all' || cat === filter;
+                    if (match) { card.classList.remove('hidden-card'); count++; }
+                    else { card.classList.add('hidden-card'); }
+                });
+                countNum.textContent = count;
+            });
+        });
+
+        // INTERSECTION OBSERVER
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => entry.target.classList.add('visible'), delay);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        cards.forEach((card, i) => {
+            card.dataset.delay = i * 60;
+            io.observe(card);
+        });
+
+        // MODAL
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modalClose');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalStack = document.getElementById('modalStack');
+        const modalLink = document.getElementById('modalLink');
+
+        function openModal(id) {
+            const p = projects[id];
+            if (!p) return;
+            modalCategory.textContent = p.category;
+            modalTitle.textContent = p.title;
+            modalDesc.textContent = p.desc;
+            modalStack.innerHTML = p.stack.map(t => `<span class="modal-tag">${t}</span>`).join('');
+            modalLink.href = p.link;
+            modalLink.querySelector('svg').previousSibling.textContent = ' ';
+            modalLink.childNodes[0].textContent = p.linkLabel + ' ';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+
+        cards.forEach(card => card.addEventListener('click', () => openModal(parseInt(card.dataset.id))));
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    })();
     </script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+/* ===== shared modal (used on home + projects) ===== */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;padding:24px}
+.modal-backdrop.open{opacity:1;visibility:visible}
+.modal-box{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:44px;max-width:600px;width:100%;position:relative;transform:scale(.92) translateY(20px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px var(--stack-shadow)}
+.modal-backdrop.open .modal-box{transform:none}
+.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .3s ease,color .3s ease}
+.modal-close:hover{border-color:var(--accent);color:var(--accent)}
+.modal-category{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--accent);margin-bottom:16px;line-height:1.1;padding-right:40px}
+.modal-section-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:10px;margin-top:24px}
+.modal-desc{color:var(--text-muted);font-size:.92rem;line-height:1.75;white-space:pre-wrap}
+.modal-stack{display:flex;flex-wrap:wrap;gap:8px}
+.modal-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);padding:5px 14px;border-radius:100px;border:1px solid var(--border-hover)}
+.modal-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:var(--accent);color:#080808;padding:12px 24px;border-radius:100px;font-weight:700;font-size:.85rem;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease}
+:root.light .modal-link{color:#f5f5f0}
+.modal-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow)}
+@media (max-width:580px){.modal-box{padding:28px 24px}}
